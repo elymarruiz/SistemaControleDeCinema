@@ -4,6 +4,12 @@
  */
 package com.mycompany.visao.cinema;
 
+import com.mycompany.dao.DaoCinema;
+import com.mycompany.ferramentas.DadosTemporarios;
+import com.mycompany.modelo.ModCinema;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author elymar.8221
@@ -15,6 +21,106 @@ public class ListCinema extends javax.swing.JFrame {
      */
     public ListCinema() {
         initComponents();
+        
+        setLocationRelativeTo(null);
+        
+        listarTodos();
+    }
+
+    public void listarTodos(){
+        try{
+            
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCinema.getModel();
+            
+            tableCinema.setModel(defaultTableModel);
+            
+            DaoCinema daoCinema = new DaoCinema();
+            
+            ResultSet resultSet = daoCinema.listarTodos();
+            
+            defaultTableModel.setRowCount(0);
+            while(resultSet.next()){
+                String id = resultSet.getString(1);
+                String cidade = resultSet.getString(2);
+                String nome = resultSet.getString(3);
+                
+                defaultTableModel.addRow(new Object[]{id, cidade, nome});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    private void listarPorId(int pId){
+        try{
+        
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCinema.getModel();
+            
+            tableCinema.setModel(defaultTableModel);
+            
+            DaoCinema daoCinema = new DaoCinema();
+            
+            ResultSet resultSet = daoCinema.listarPorId(pId);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String cidade = resultSet.getString(2);
+                String nome = resultSet.getString(3);
+                
+                defaultTableModel.addRow(new Object[]{id, cidade, nome});
+            }           
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorCidade(int idCidade){
+        try{
+        
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCinema.getModel();
+            
+            tableCinema.setModel(defaultTableModel);
+            
+            DaoCinema daoCinema = new DaoCinema();
+            
+            ResultSet resultSet = daoCinema.listarPorCidade(idCidade);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String cidade = resultSet.getString(2);
+                String nome = resultSet.getString(3);
+                
+                defaultTableModel.addRow(new Object[]{id, cidade, nome});
+            }                                 
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorNome(String pNome){
+        try{
+        
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCinema.getModel();
+            
+            tableCinema.setModel(defaultTableModel);
+            
+            DaoCinema daoCinema = new DaoCinema();
+            
+            ResultSet resultSet = daoCinema.listarPorNome(pNome);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String cidade = resultSet.getString(2);
+                String nome = resultSet.getString(3);
+                
+                defaultTableModel.addRow(new Object[]{id, cidade, nome});
+            }                                 
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -59,10 +165,20 @@ public class ListCinema extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableCinema.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableCinemaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableCinema);
 
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -108,6 +224,38 @@ public class ListCinema extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        switch (jcbTipoFiltro.getSelectedIndex()){
+            case 0:
+                listarTodos();
+                break;
+            case 1:
+                listarPorId(Integer.parseInt(tfFiltro.getText()));
+                break;
+            case 2:
+                listarPorCidade(Integer.parseInt(tfFiltro.getText()));
+                break;
+            case 3:
+                listarPorNome(tfFiltro.getText());
+                break;
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void tableCinemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCinemaMouseClicked
+        if(evt.getClickCount() == 2){
+            ModCinema modCategoria = new ModCinema();
+            
+            modCategoria.setId(Integer.parseInt(String.valueOf(tableCinema.getValueAt(tableCinema.getSelectedRow(), 0))));
+            modCategoria.setCidade(String.valueOf(tableCinema.getValueAt(tableCinema.getSelectedRow(), 1)));
+            modCategoria.setNome(String.valueOf(tableCinema.getValueAt(tableCinema.getSelectedRow(), 2)));
+            
+            DadosTemporarios.temObject = (ModCinema) modCategoria;
+            
+            CadCinema cadCinema = new CadCinema();
+            cadCinema.setVisible(true);
+        }
+    }//GEN-LAST:event_tableCinemaMouseClicked
 
     /**
      * @param args the command line arguments

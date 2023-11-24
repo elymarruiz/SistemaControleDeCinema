@@ -63,7 +63,7 @@ public class CadCinema extends javax.swing.JFrame {
         DaoCinema daoCinema = new DaoCinema();
         
         if(daoCinema.inserir(Integer.parseInt(tfId.getText()), cbCidade.getText(), tfNome.getText()))){
-            JOptionPane.showMessageDialog(null, "Categoria salva com sucesso!");
+            JOptionPane.showMessageDialog(null, "Cinema salvo com sucesso!");
             
             tfId.setText(String.valueOf(daoCinema.buscarProximoId()));
             cbCidade.setText("");
@@ -131,6 +131,11 @@ public class CadCinema extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CADASTRO DE CINEMA");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -273,6 +278,10 @@ public class CadCinema extends javax.swing.JFrame {
             dispose();
         }      
     }//GEN-LAST:event_btnAcaoActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        Formularios.cadCinema = null;
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
