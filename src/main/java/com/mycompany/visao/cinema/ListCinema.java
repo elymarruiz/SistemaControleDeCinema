@@ -243,18 +243,7 @@ public class ListCinema extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void tableCinemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCinemaMouseClicked
-        if(evt.getClickCount() == 2){
-            ModCinema modCategoria = new ModCinema();
-            
-            modCategoria.setId(Integer.parseInt(String.valueOf(tableCinema.getValueAt(tableCinema.getSelectedRow(), 0))));
-            modCategoria.setCidade(String.valueOf(tableCinema.getValueAt(tableCinema.getSelectedRow(), 1)));
-            modCategoria.setNome(String.valueOf(tableCinema.getValueAt(tableCinema.getSelectedRow(), 2)));
-            
-            DadosTemporarios.temObject = (ModCinema) modCategoria;
-            
-            CadCinema cadCinema = new CadCinema();
-            cadCinema.setVisible(true);
-        }
+
     }//GEN-LAST:event_tableCinemaMouseClicked
 
     /**

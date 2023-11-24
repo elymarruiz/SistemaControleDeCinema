@@ -119,7 +119,7 @@ public class TelaBilheteria extends javax.swing.JFrame {
         tfIdIngresso = new javax.swing.JTextField();
         tfIdSessao = new javax.swing.JTextField();
         labelSala = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcbTipoDeIngresso = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         labelPreco = new javax.swing.JLabel();
@@ -245,7 +245,7 @@ public class TelaBilheteria extends javax.swing.JFrame {
                                 .addGap(18, 18, 18))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jcbTipoDeIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,7 +301,9 @@ public class TelaBilheteria extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelQuantidadeAtual)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(labelQuantidadeAtual))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -310,7 +312,7 @@ public class TelaBilheteria extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbTipoDeIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfIdIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(labelSala)
@@ -373,8 +375,8 @@ public class TelaBilheteria extends javax.swing.JFrame {
             int idSala = Integer.parseInt(tfIdSala.getText());
             int idSessao = Integer.parseInt(tfIdSessao.getText());
             int idIngresso = Integer.parseInt(tfIdIngresso.getText());
-            String horario = 
-            String tipodeingresso =
+            String horario = Integer.parseInt(labelSessaoHorario.getText());
+            String tipodeingresso = 
             String preco =        
             
             daoCompra.inserir(id, idCliente, idFilme, idSala, idSessao, idIngresso, horario, tipodeingresso, preco);
@@ -438,7 +440,6 @@ public class TelaBilheteria extends javax.swing.JFrame {
     private javax.swing.JButton btnComprar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel12;
@@ -450,6 +451,7 @@ public class TelaBilheteria extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JComboBox<String> jcbTipoDeIngresso;
     private javax.swing.JLabel labelNomeFilme;
     private javax.swing.JLabel labelPreco;
     private javax.swing.JLabel labelQuantidadeAtual;

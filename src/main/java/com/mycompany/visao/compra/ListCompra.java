@@ -4,6 +4,10 @@
  */
 package com.mycompany.visao.compra;
 
+import com.mycompany.dao.DaoCompra;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author elymar.8221
@@ -15,7 +19,43 @@ public class ListCompra extends javax.swing.JFrame {
      */
     public ListCompra() {
         initComponents();
+        
+        setLocationRelativeTo(null);
+        
+        listarTodos();
     }
+    
+    public void listarTodos(){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCompra.getModel();
+            
+            tableCompra.setModel(defaultTableModel);
+
+            DaoCompra daoCompra = new DaoCompra();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoCompra.listarTodos();
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String cliente = resultSet.getString(2);
+                String filme = resultSet.getString(3);
+                String sala = resultSet.getString(4);
+                String sessao = resultSet.getString(5);
+                String horario = resultSet.getString(6);
+                String ingresso = resultSet.getString(7);
+                String preco = resultSet.getString(8);
+                
+                defaultTableModel.addRow(new Object[]{id, cliente, filme, sala, sessao, horario, ingresso, preco});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }     
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,24 +78,24 @@ public class ListCompra extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jcbTipoFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "ID", "CLIENTE", "SALA", "SESSÃO", "HORÁRIO", "INGRESSO", "PREÇO" }));
+        jcbTipoFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "ID", "FILME", "CLIENTE", "SALA", "SESSÃO", "HORÁRIO", "INGRESSO", "PREÇO" }));
 
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         btnBuscar.setText("Buscar");
 
         tableCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "CLIENTE", "SALA", "SESSÃO", "HORÁRIO", "INGRESSO", "PREÇO"
+                "ID", "CLIENTE", "FILME", "SALA", "SESSÃO", "HORÁRIO", "INGRESSO", "PREÇO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -69,6 +109,9 @@ public class ListCompra extends javax.swing.JFrame {
             tableCompra.getColumnModel().getColumn(2).setResizable(false);
             tableCompra.getColumnModel().getColumn(3).setResizable(false);
             tableCompra.getColumnModel().getColumn(4).setResizable(false);
+            tableCompra.getColumnModel().getColumn(5).setResizable(false);
+            tableCompra.getColumnModel().getColumn(6).setResizable(false);
+            tableCompra.getColumnModel().getColumn(7).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

@@ -4,11 +4,13 @@
  */
 package com.mycompany.visao.cinema;
 
+import com.mycompany.dao.DaoCidade;
 import com.mycompany.dao.DaoCinema;
 import com.mycompany.ferramentas.Constantes;
 import com.mycompany.ferramentas.DadosTemporarios;
 import com.mycompany.ferramentas.Formularios;
 import com.mycompany.modelo.ModCinema;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +27,7 @@ public class CadCinema extends javax.swing.JFrame {
         
         if(!existeDadosTemporarios()){
             DaoCinema daoCinema = new DaoCinema();
+            DaoCidade daoCidade = new DaoCidade();
             
             int id = daoCinema.buscarProximoId();
             if (id >= 0)
@@ -36,10 +39,11 @@ public class CadCinema extends javax.swing.JFrame {
             btnAcao.setText(Constantes.BTN_ALTERAR_TEXT);
             btnExcluir.setVisible(true);  
         }
-        
+       
         setLocationRelativeTo(null);
         
         tfId.setEnabled(false);
+        tfIdCidade.setEnabled(false);
     }
     
     private Boolean existeDadosTemporarios(){
@@ -49,7 +53,7 @@ public class CadCinema extends javax.swing.JFrame {
             String nome = ((ModCinema) DadosTemporarios.temObject).getNome();
             
             tfId.setText(String.valueOf(id));
-            cbCidade.setText(String.valueOf(id));
+            tfIdCidade.setText(String.valueOf(id));
             tfNome.setText(nome);
             
             DadosTemporarios.temObject = null;
@@ -62,11 +66,10 @@ public class CadCinema extends javax.swing.JFrame {
     private void inserir(){
         DaoCinema daoCinema = new DaoCinema();
         
-        if(daoCinema.inserir(Integer.parseInt(tfId.getText()), cbCidade.getText(), tfNome.getText()))){
+        if(daoCinema.inserir(Integer.parseInt(tfId.getText()), tfIdCidade.getText(), tfNome.getText()))){
             JOptionPane.showMessageDialog(null, "Cinema salvo com sucesso!");
             
             tfId.setText(String.valueOf(daoCinema.buscarProximoId()));
-            cbCidade.setText("");
             tfNome.setText("");
         }else{
             JOptionPane.showMessageDialog(null, "Não foi possivel salvar a categoria!");
@@ -76,11 +79,11 @@ public class CadCinema extends javax.swing.JFrame {
     private void alterar(){
         DaoCinema daoCinema = new DaoCinema();
         
-        if (daoCinema.alterar(Integer.parseInt(tfId.getText()), cbCidade.getText, tfNome.getText()())){
+        if (daoCinema.alterar(Integer.parseInt(tfId.getText()), tfIdCidade.getText, tfNome.getText()())){
             JOptionPane.showMessageDialog(null, "Cinema alterado com sucesso");
             
             tfId.setText("");
-            cbCidade.setText("");
+            tfIdCidade.setText("");
             tfNome.setText("");          
         }else{
             JOptionPane.showMessageDialog(null, "Não foi possivel alterar o cinema");
@@ -98,7 +101,6 @@ public class CadCinema extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Cinema " + tfNome.getText() + " excluído com sucesso!");
             
             tfId.setText("");
-            cbCidade.setText("");
             tfNome.setText("");
         }else{
             JOptionPane.showMessageDialog(null, "Não foi possível excluir o cinema!");
@@ -108,6 +110,19 @@ public class CadCinema extends javax.swing.JFrame {
         
         dispose();
     }         
+    
+     public void carregarCidades(){
+        try{
+            DaoCidade daoCidade = new DaoCidade();
+
+            ResultSet resultSet = daoCidade.listarTodos();
+
+            while(resultSet.next())
+                tfIdCidade.addItem(resultSet.getString("NOME"));
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -127,7 +142,7 @@ public class CadCinema extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         tfNome = new javax.swing.JTextField();
-        cbCidade = new javax.swing.JComboBox<>();
+        jcbCidade = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CADASTRO DE CINEMA");
@@ -177,9 +192,9 @@ public class CadCinema extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Sitka Display", 1, 24)); // NOI18N
         jLabel3.setText("Nome");
 
-        cbCidade.addActionListener(new java.awt.event.ActionListener() {
+        jcbCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCidadeActionPerformed(evt);
+                jcbCidadeActionPerformed(evt);
             }
         });
 
@@ -198,7 +213,7 @@ public class CadCinema extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jcbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(tfIdCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1)
@@ -220,7 +235,7 @@ public class CadCinema extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfIdCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -258,9 +273,9 @@ public class CadCinema extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfIdCidadeActionPerformed
 
-    private void cbCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCidadeActionPerformed
+    private void jcbCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCidadeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbCidadeActionPerformed
+    }//GEN-LAST:event_jcbCidadeActionPerformed
 
     private void btnAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcaoActionPerformed
         DaoCinema daoCinema = new DaoCinema();
@@ -269,7 +284,7 @@ public class CadCinema extends javax.swing.JFrame {
             inserir();
             
             tfId.setText(String.valueOf(daoCinema.buscarProximoId()));
-            cbCidade.setText("");
+            jcbCidade.setText("");
             tfNome.setText("");
         }
         else if (btnAcao.getText() == Constantes.BTN_ALTERAR_TEXT){
@@ -321,11 +336,11 @@ public class CadCinema extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcao;
     private javax.swing.JButton btnExcluir;
-    private javax.swing.JComboBox<String> cbCidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JComboBox<String> jcbCidade;
     private javax.swing.JTextField tfId;
     private javax.swing.JTextField tfIdCidade;
     private javax.swing.JTextField tfNome;
