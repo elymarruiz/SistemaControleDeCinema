@@ -13,7 +13,7 @@ public class Constantes {
     public static String BTN_ALTERAR_TEXT = "Alterar";
     public static String BTN_EXCLUIR_TEXT = "Excluir";
     
-    public static String LABEL_LOGIN = "Entrar";
+    public static String LABEL_LOGIN = "Login";
     public static String LABEL_SAIR = "Sair";
     public static String PERGUNTA_ENCERRAR_SESSAO = "Deseja realmete sair?";
     public static String PREFIXO_USUARIO_LOGADO = "Usuário logado: ";

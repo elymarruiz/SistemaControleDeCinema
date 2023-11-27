@@ -4,6 +4,10 @@
  */
 package com.mycompany.visao.ingressos;
 
+import com.mycompany.dao.DaoIngresso;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author elymar.8221
@@ -15,7 +19,265 @@ public class ListIngresso extends javax.swing.JFrame {
      */
     public ListIngresso() {
         initComponents();
+        
+        setLocationRelativeTo(null);
+        
+        listarTodos();
     }
+    
+    public void listarTodos(){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableIngresso.getModel();
+            
+            tableIngresso.setModel(defaultTableModel);
+
+            DaoIngresso daoIngresso = new DaoIngresso();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoIngresso.listarTodos();
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String regular = resultSet.getString(2);
+                String meiaentrada = resultSet.getString(3);
+                String criança = resultSet.getString(4);
+                String idoso = resultSet.getString(5);
+                String preço = resultSet.getString(6);
+                
+                defaultTableModel.addRow(new Object[]{id, regular, meiaentrada, criança, idoso, preço});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorId(int Id){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableIngresso.getModel();
+            
+            tableIngresso.setModel(defaultTableModel);
+
+            DaoIngresso daoIngresso = new DaoIngresso();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoIngresso.listarTodos();
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String regular = resultSet.getString(2);
+                String meiaentrada = resultSet.getString(3);
+                String criança = resultSet.getString(4);
+                String idoso = resultSet.getString(5);
+                String preço = resultSet.getString(6);
+                
+                defaultTableModel.addRow(new Object[]{id, regular, meiaentrada, criança, idoso, preço});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorIngressoRegular(String Regular){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableIngresso.getModel();
+            
+            tableIngresso.setModel(defaultTableModel);
+
+            DaoIngresso daoIngresso = new DaoIngresso();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoIngresso.listarTodos();
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String regular = resultSet.getString(2);
+                String meiaentrada = resultSet.getString(3);
+                String criança = resultSet.getString(4);
+                String idoso = resultSet.getString(5);
+                String preço = resultSet.getString(6);
+                
+                defaultTableModel.addRow(new Object[]{id, regular, meiaentrada, criança, idoso, preço});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorIngressoMeiaEntrada(String MeiaEntrada){
+       try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableIngresso.getModel();
+            
+            tableIngresso.setModel(defaultTableModel);
+
+            DaoIngresso daoIngresso = new DaoIngresso();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoIngresso.listarTodos();
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String regular = resultSet.getString(2);
+                String meiaentrada = resultSet.getString(3);
+                String criança = resultSet.getString(4);
+                String idoso = resultSet.getString(5);
+                String preço = resultSet.getString(6);
+                
+                defaultTableModel.addRow(new Object[]{id, regular, meiaentrada, criança, idoso, preço});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        } 
+    }
+    
+    public void listarPorIngressoCrianca(String Crianca){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableIngresso.getModel();
+            
+            tableIngresso.setModel(defaultTableModel);
+
+            DaoIngresso daoIngresso = new DaoIngresso();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoIngresso.listarTodos();
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String regular = resultSet.getString(2);
+                String meiaentrada = resultSet.getString(3);
+                String criança = resultSet.getString(4);
+                String idoso = resultSet.getString(5);
+                String preço = resultSet.getString(6);
+                
+                defaultTableModel.addRow(new Object[]{id, regular, meiaentrada, criança, idoso, preço});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        } 
+    }
+    
+    public void listarPorIngressoIdoso(String Idoso){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableIngresso.getModel();
+            
+            tableIngresso.setModel(defaultTableModel);
+
+            DaoIngresso daoIngresso = new DaoIngresso();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoIngresso.listarTodos();
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String regular = resultSet.getString(2);
+                String meiaentrada = resultSet.getString(3);
+                String criança = resultSet.getString(4);
+                String idoso = resultSet.getString(5);
+                String preço = resultSet.getString(6);
+                
+                defaultTableModel.addRow(new Object[]{id, regular, meiaentrada, criança, idoso, preço});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        } 
+    }
+    
+    public void listarPorPrecoMaiorQue(String Preco){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableIngresso.getModel();
+            
+            tableIngresso.setModel(defaultTableModel);
+
+            DaoIngresso daoIngresso = new DaoIngresso();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoIngresso.listarTodos();
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String regular = resultSet.getString(2);
+                String meiaentrada = resultSet.getString(3);
+                String criança = resultSet.getString(4);
+                String idoso = resultSet.getString(5);
+                String preço = resultSet.getString(6);
+                
+                defaultTableModel.addRow(new Object[]{id, regular, meiaentrada, criança, idoso, preço});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        } 
+    }
+    
+    public void listarPorPrecoMenorQue(String Preco){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableIngresso.getModel();
+            
+            tableIngresso.setModel(defaultTableModel);
+
+            DaoIngresso daoIngresso = new DaoIngresso();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoIngresso.listarTodos();
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String regular = resultSet.getString(2);
+                String meiaentrada = resultSet.getString(3);
+                String criança = resultSet.getString(4);
+                String idoso = resultSet.getString(5);
+                String preço = resultSet.getString(6);
+                
+                defaultTableModel.addRow(new Object[]{id, regular, meiaentrada, criança, idoso, preço});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        } 
+    }
+    
+    public void listarPorPrecoIgualA(String Preco){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableIngresso.getModel();
+            
+            tableIngresso.setModel(defaultTableModel);
+
+            DaoIngresso daoIngresso = new DaoIngresso();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoIngresso.listarTodos();
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String regular = resultSet.getString(2);
+                String meiaentrada = resultSet.getString(3);
+                String criança = resultSet.getString(4);
+                String idoso = resultSet.getString(5);
+                String preço = resultSet.getString(6);
+                
+                defaultTableModel.addRow(new Object[]{id, regular, meiaentrada, criança, idoso, preço});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        } 
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,7 +293,7 @@ public class ListIngresso extends javax.swing.JFrame {
         jcbTipoFiltro = new javax.swing.JComboBox<>();
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TableIngresso = new javax.swing.JTable();
+        tableIngresso = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CONSULTA DE INGRESSO");
@@ -42,8 +304,13 @@ public class ListIngresso extends javax.swing.JFrame {
 
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
-        TableIngresso.setModel(new javax.swing.table.DefaultTableModel(
+        tableIngresso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -62,7 +329,7 @@ public class ListIngresso extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(TableIngresso);
+        jScrollPane1.setViewportView(tableIngresso);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -110,6 +377,35 @@ public class ListIngresso extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        switch (jcbTipoFiltro.getSelectedIndex()){
+            case 0:
+                listarTodos();
+                break;
+            case 1:
+                listarPorIngressoRegular(tfFiltro.getText());
+                break;
+            case 2:
+                listarPorIngressoMeiaEntrada(tfFiltro.getText());
+                break;
+            case 3:
+                listarPorIngressoCrianca(tfFiltro.getText());
+                break;
+            case 4:
+                listarPorIngressoIdoso(tfFiltro.getText());
+                break;
+            case 5:
+                listarPorPrecoMaiorQue(tfFiltro.getText());
+                break;
+            case 6:
+                listarPorPrecoMenorQue(tfFiltro.getText());
+                break;
+            case 7:
+                listarPorPrecoIgualA(tfFiltro.getText());
+                break;
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -146,11 +442,11 @@ public class ListIngresso extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TableIngresso;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jcbTipoFiltro;
+    private javax.swing.JTable tableIngresso;
     private javax.swing.JTextField tfFiltro;
     // End of variables declaration//GEN-END:variables
 }

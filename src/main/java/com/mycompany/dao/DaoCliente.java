@@ -65,14 +65,13 @@ public class DaoCliente extends BancoDeDadosMySql{
         }
     }
     
-    public Boolean alterarSenha(int id, String novaSenha){
+    public Boolean excluir(int id){
         try{
-            sql = "UPDATE CLIENTE SET SENHA = ? WHERE ID = ?";
+            sql = "DELETE FROM  WHERE ID = ?";
             
             setStatement(getConexao().prepareStatement(sql));
             
-            getStatement().setInt(2, id);
-            getStatement().setString(1, novaSenha);
+            getStatement().setInt(1, id);
             
             getStatement().executeUpdate();
             
@@ -83,13 +82,14 @@ public class DaoCliente extends BancoDeDadosMySql{
         }
     }
     
-    public Boolean excluir(int id){
+    public Boolean alterarSenha(int id, String novaSenha){
         try{
-            sql = "DELETE FROM CLIENTE WHERE ID = ?";
+            sql = "UPDATE CLIENTE SET SENHA = ? WHERE ID = ?";
             
             setStatement(getConexao().prepareStatement(sql));
             
-            getStatement().setInt(1, id);
+            getStatement().setInt(2, id);
+            getStatement().setString(1, novaSenha);
             
             getStatement().executeUpdate();
             
@@ -111,7 +111,7 @@ public class DaoCliente extends BancoDeDadosMySql{
                 "   C.EMAIL AS EMAIL,               " +
                 "   C.CPF AS CPF,                   " +
                 "   C.USUARIO AS USUARIO,           " +
-                "   C.SENHAS AS SENHA,              " +    
+                "   C.SENHA  AS SENHA               " +    
                 " FROM                              " +
                 "   CLIENTE C                       " ;
             
@@ -136,7 +136,7 @@ public class DaoCliente extends BancoDeDadosMySql{
                 "   C.EMAIL AS EMAIL,               " +
                 "   C.CPF AS CPF,                   " +
                 "   C.USUARIO AS USUARIO,           " +
-                "   C.SENHAS AS SENHA,              " +    
+                "   C.SENHA AS SENHA                " +    
                 " FROM                              " +
                 "   CLIENTE C                       " +
                 " WHERE C.ID = ?                    " ;
@@ -164,7 +164,7 @@ public class DaoCliente extends BancoDeDadosMySql{
                 "   C.EMAIL AS EMAIL,               " +
                 "   C.CPF AS CPF,                   " +
                 "   C.USUARIO AS USUARIO,           " +
-                "   C.SENHAS AS SENHA,              " +    
+                "   C.SENHA AS SENHA                " +    
                 " FROM                              " +
                 "   CLIENTE C                       " +
                 " WHERE C.NOME LIKE ?               " ;
@@ -192,7 +192,7 @@ public class DaoCliente extends BancoDeDadosMySql{
                 "   C.EMAIL AS EMAIL,               " +
                 "   C.CPF AS CPF,                   " +
                 "   C.USUARIO AS USUARIO,           " +
-                "   C.SENHAS AS SENHA,              " +    
+                "   C.SENHA AS SENHA                " +    
                 " FROM                              " +
                 "   CLIENTE C                       " +
                 " WHERE C.SOBRENOME LIKE ?          " ;
@@ -220,7 +220,7 @@ public class DaoCliente extends BancoDeDadosMySql{
                 "   C.EMAIL AS EMAIL,               " +
                 "   C.CPF AS CPF,                   " +
                 "   C.USUARIO AS USUARIO,           " +
-                "   C.SENHAS AS SENHA,              " +    
+                "   C.SENHA AS SENHA                " +    
                 " FROM                              " +
                 "   CLIENTE C                       " +
                 " WHERE C.GENERO LIKE ?             " ;
@@ -248,7 +248,7 @@ public class DaoCliente extends BancoDeDadosMySql{
                 "   C.EMAIL AS EMAIL,               " +
                 "   C.CPF AS CPF,                   " +
                 "   C.USUARIO AS USUARIO,           " +
-                "   C.SENHAS AS SENHA,              " +    
+                "   C.SENHA AS SENHA                " +    
                 " FROM                              " +
                 "   CLIENTE C                       " +
                 " WHERE C.EMAIL LIKE ?              " ;
@@ -276,7 +276,7 @@ public class DaoCliente extends BancoDeDadosMySql{
                 "   C.EMAIL AS EMAIL,               " +
                 "   C.CPF AS CPF,                   " +
                 "   C.USUARIO AS USUARIO,           " +
-                "   C.SENHAS AS SENHA,              " +    
+                "   C.SENHA AS SENHA                " +    
                 " FROM                              " +
                 "   CLIENTE C                       " +
                 " WHERE C.CPF LIKE ?                " ;
@@ -304,7 +304,7 @@ public class DaoCliente extends BancoDeDadosMySql{
                 "   C.EMAIL AS EMAIL,               " +
                 "   C.CPF AS CPF,                   " +
                 "   C.USUARIO AS USUARIO,           " +
-                "   C.SENHAS AS SENHA,              " +    
+                "   C.SENHA AS SENHA                " +    
                 " FROM                              " +
                 "   CLIENTE C                       " +
                 " WHERE C.USUARIO LIKE ?            " ;

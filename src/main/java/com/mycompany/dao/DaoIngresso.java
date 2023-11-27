@@ -4,10 +4,354 @@
  */
 package com.mycompany.dao;
 
+import com.mycompany.ferramentas.BancoDeDadosMySql;
+import static com.mycompany.ferramentas.BancoDeDadosMySql.getConexao;
+import static com.mycompany.ferramentas.BancoDeDadosMySql.getResultado;
+import static com.mycompany.ferramentas.BancoDeDadosMySql.getStatement;
+import static com.mycompany.ferramentas.BancoDeDadosMySql.setResultado;
+import static com.mycompany.ferramentas.BancoDeDadosMySql.setStatement;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author elymar.8221
  */
-public class DaoIngresso {
+public class DaoIngresso extends BancoDeDadosMySql{
+    private String sql;
     
+    public Boolean inserir(int id, String regular, String meiaentrada , String crianca, String idoso, String preco){
+        try{
+            sql = "INSERT INTO INGRESSO (ID, REGULAR, MEIAENTRADA, CRIANÇA, IDOSO, PREÇO) VALUES (?, ?, ?, ?, ?, ?)";
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setInt(1, id);
+            getStatement().setString(2, regular);
+            getStatement().setString(3, meiaentrada);
+            getStatement().setString(4, crianca);
+            getStatement().setString(5, idoso);
+            getStatement().setString(6, preco);
+            
+            getStatement().executeUpdate();
+            
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    public Boolean alterar(int id, String regular, String meiaentrada , String crianca, String idoso, String preco){
+        try{
+            sql = "UPDATE INGRESSO SET REGULAR = ?, MEIA ENTRADA = ?, CRIANÇA = ?, IDOSO = ?, PREÇO = ? WHERE ID = ?";
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setInt(6, id);
+            getStatement().setString(1, regular);
+            getStatement().setString(2, meiaentrada);
+            getStatement().setString(3, crianca);
+            getStatement().setString(4, idoso);
+            getStatement().setString(5, preco);
+            
+            getStatement().executeUpdate();
+            
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    public Boolean excluir(int id){
+        try{
+            sql = "DELETE FROM INGRESSO WHERE ID = ?";
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setInt(1, id);
+            
+            getStatement().executeUpdate();
+            
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    public ResultSet listarTodos(){
+        try{
+            sql = 
+                " SELECT                              " +
+                "   I.ID AS ID,                       " +
+                "   REG.NOME AS REGULAR               " +
+                "   MEI.NOME AS MEIAENTRADA,          " +
+                "   CRI.NOME AS CRIANÇA               " +
+                "   IDO.NOME AS IDOSO                 " +
+                "   PRE.PREÇO AS PREÇO                " +
+                " FROM                                " +
+                "   INGRESSO I                        " +
+                " JOIN INGRESSO I ON                  " +
+                "   I.ID = I.ID_INGRESSO              " ;
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            setResultado(getStatement().executeQuery());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return getResultado();
+    }
+    public ResultSet listarPorId(int id){
+        try{
+            sql = 
+                " SELECT                              " +
+                "   I.ID AS ID,                       " +
+                "   REG.NOME AS REGULAR               " +
+                "   MEI.NOME AS MEIAENTRADA,          " +
+                "   CRI.NOME AS CRIANÇA               " +
+                "   IDO.NOME AS IDOSO                 " +
+                "   PRE.PREÇO AS PREÇO                " +
+                " FROM                                " +
+                "   INGRESSO I                        " +
+                " JOIN INGRESSO I ON                  " +
+                "   I.ID = I.ID_INGRESSO              " +
+                " WHERE                               " +
+                "   I.ID = ?                          " ;
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setInt(1, id);
+            
+            setResultado(getStatement().executeQuery());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return getResultado();
+    }
+    
+    public ResultSet listarPorIngressoRegular(String regular){
+        try{
+            sql = 
+                " SELECT                              " +
+                "   I.ID AS ID,                       " +
+                "   REG.NOME AS REGULAR               " +
+                "   MEI.NOME AS MEIAENTRADA,          " +
+                "   CRI.NOME AS CRIANÇA               " +
+                "   IDO.NOME AS IDOSO                 " +
+                "   PRE.PREÇO AS PREÇO                " +
+                " FROM                                " +
+                "   INGRESSO I                        " +
+                " JOIN INGRESSO I ON                  " +
+                "   I.ID = I.ID_INGRESSO              " +
+                " WHERE                               " +
+                "   REG.NOME LIKE ?                   " ;
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setString(2, regular + "%");
+            
+            setResultado(getStatement().executeQuery());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return getResultado();
+    }
+    
+    public ResultSet listarPorIngressoMeiaEntrada(String meiaentrada){
+        try{
+            sql = 
+                " SELECT                              " +
+                "   I.ID AS ID,                       " +
+                "   REG.NOME AS REGULAR               " +
+                "   MEI.NOME AS MEIAENTRADA,          " +
+                "   CRI.NOME AS CRIANÇA               " +
+                "   IDO.NOME AS IDOSO                 " +
+                "   PRE.PREÇO AS PREÇO                " +
+                " FROM                                " +
+                "   INGRESSO I                        " +
+                " JOIN INGRESSO I ON                  " +
+                "   I.ID = I.ID_INGRESSO              " +
+                " WHERE                               " +
+                "   MEI.NOME LIKE ?                   " ;
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setString(3, meiaentrada + "%");
+            
+            setResultado(getStatement().executeQuery());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return getResultado();
+    }
+    
+    public ResultSet listarPorIngressoCrianca(String crianca){
+        try{
+            sql = 
+                " SELECT                              " +
+                "   I.ID AS ID,                       " +
+                "   REG.NOME AS REGULAR               " +
+                "   MEI.NOME AS MEIAENTRADA,          " +
+                "   CRI.NOME AS CRIANÇA               " +
+                "   IDO.NOME AS IDOSO                 " +
+                "   PRE.PREÇO AS PREÇO                " +
+                " FROM                                " +
+                "   INGRESSO I                        " +
+                " JOIN INGRESSO I ON                  " +
+                "   I.ID = I.ID_INGRESSO              " +
+                " WHERE                               " +
+                "   CRI.NOME LIKE ?                   " ;
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setString(4, crianca + "%");
+            
+            setResultado(getStatement().executeQuery());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return getResultado();
+    }
+    
+    public ResultSet listarPorIngressoIdoso(String idoso){
+        try{
+            sql = 
+                " SELECT                              " +
+                "   I.ID AS ID,                       " +
+                "   REG.NOME AS REGULAR               " +
+                "   MEI.NOME AS MEIAENTRADA,          " +
+                "   CRI.NOME AS CRIANÇA               " +
+                "   IDO.NOME AS IDOSO                 " +
+                "   PRE.PREÇO AS PREÇO                " +
+                " FROM                                " +
+                "   INGRESSO I                        " +
+                " JOIN INGRESSO I ON                  " +
+                "   I.ID = I.ID_INGRESSO              " +
+                " WHERE                               " +
+                "   IDO.NOME LIKE ?                   " ;
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setString(5, idoso + "%");
+            
+            setResultado(getStatement().executeQuery());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return getResultado();
+    }
+    
+    public ResultSet listarPorPrecoMaiorQue(String preco){
+        try{
+            sql = 
+                " SELECT                              " +
+                "   I.ID AS ID,                       " +
+                "   REG.NOME AS REGULAR               " +
+                "   MEI.NOME AS MEIAENTRADA,          " +
+                "   CRI.NOME AS CRIANÇA               " +
+                "   IDO.NOME AS IDOSO                 " +
+                "   PRE.PREÇO AS PREÇO                " +
+                " FROM                                " +
+                "   INGRESSO I                        " +
+                " JOIN INGRESSO I ON                  " +
+                "   I.ID = I.ID_INGRESSO              " +
+                " WHERE                               " +
+                "   I.PREÇO > ?                 " ;
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setString(6, preco);
+            
+            setResultado(getStatement().executeQuery());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return getResultado();
+    }
+    
+    public ResultSet listarPorPrecoMenorQue(String preco){
+        try{
+            sql = 
+                " SELECT                              " +
+                "   I.ID AS ID,                       " +
+                "   REG.NOME AS REGULAR               " +
+                "   MEI.NOME AS MEIAENTRADA,          " +
+                "   CRI.NOME AS CRIANÇA               " +
+                "   IDO.NOME AS IDOSO                 " +
+                "   PRE.PREÇO AS PREÇO                " +
+                " FROM                                " +
+                "   INGRESSO I                        " +
+                " JOIN INGRESSO I ON                  " +
+                "   I.ID = I.ID_INGRESSO              " +
+                " WHERE                               " +
+                "   I.PREÇO < ?                 " ;
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setString(6, preco);
+            
+            setResultado(getStatement().executeQuery());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return getResultado();
+    }
+    
+    public ResultSet listarPorPrecoIgualA(String preco){
+        try{
+            sql = 
+                " SELECT                              " +
+                "   I.ID AS ID,                       " +
+                "   REG.NOME AS REGULAR               " +
+                "   MEI.NOME AS MEIAENTRADA,          " +
+                "   CRI.NOME AS CRIANÇA               " +
+                "   IDO.NOME AS IDOSO                 " +
+                "   PRE.PREÇO AS PREÇO                " +
+                " FROM                                " +
+                "   INGRESSO I                        " +
+                " JOIN INGRESSO I ON                  " +
+                "   I.ID = I.ID_INGRESSO              " +
+                "   I.PREÇO = ?                 " ;
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setString(6, preco);
+            
+            setResultado(getStatement().executeQuery());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return getResultado();
+    }
+    
+    public int buscarProximoId(){
+        int id = 0;
+        
+        try{
+            sql = "SELECT IFNULL(MAX(ID), 0) + 1 FROM INGRESSO";
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            setResultado(getStatement().executeQuery());
+            
+            getResultado().next(); //Move para o primeiro registro.
+            
+            id = getResultado().getInt(1); //Pega o valor retornado na consulta
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return id;
+    }
 }

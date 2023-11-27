@@ -66,7 +66,7 @@ public class CadCinema extends javax.swing.JFrame {
     private void inserir(){
         DaoCinema daoCinema = new DaoCinema();
         
-        if(daoCinema.inserir(Integer.parseInt(tfId.getText()), tfIdCidade.getText(), tfNome.getText()))){
+        if(daoCinema.inserir(Integer.parseInt(tfId.getText()), Integer.parseInt(tfIdCidade.getText()), tfNome.getText())){
             JOptionPane.showMessageDialog(null, "Cinema salvo com sucesso!");
             
             tfId.setText(String.valueOf(daoCinema.buscarProximoId()));
@@ -79,7 +79,7 @@ public class CadCinema extends javax.swing.JFrame {
     private void alterar(){
         DaoCinema daoCinema = new DaoCinema();
         
-        if (daoCinema.alterar(Integer.parseInt(tfId.getText()), tfIdCidade.getText, tfNome.getText()())){
+        if (daoCinema.alterar(Integer.parseInt(tfId.getText()), Integer.parseInt(tfIdCidade.getText()), tfNome.getText())){
             JOptionPane.showMessageDialog(null, "Cinema alterado com sucesso");
             
             tfId.setText("");
@@ -118,7 +118,7 @@ public class CadCinema extends javax.swing.JFrame {
             ResultSet resultSet = daoCidade.listarTodos();
 
             while(resultSet.next())
-                tfIdCidade.addItem(resultSet.getString("NOME"));
+                jcbCidade.addItem(resultSet.getString("NOME"));
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
@@ -284,7 +284,7 @@ public class CadCinema extends javax.swing.JFrame {
             inserir();
             
             tfId.setText(String.valueOf(daoCinema.buscarProximoId()));
-            jcbCidade.setText("");
+//            jcbCidade.setText("");
             tfNome.setText("");
         }
         else if (btnAcao.getText() == Constantes.BTN_ALTERAR_TEXT){

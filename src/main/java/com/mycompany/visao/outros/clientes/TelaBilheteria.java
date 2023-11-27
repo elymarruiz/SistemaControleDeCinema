@@ -5,9 +5,11 @@
 package com.mycompany.visao.outros.clientes;
 
 import com.mycompany.dao.DaoCompra;
+import com.mycompany.dao.DaoFilme;
 import com.mycompany.ferramentas.DadosTemporarios;
 import com.mycompany.ferramentas.Formularios;
 import com.mycompany.modelo.ModCompra;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,44 +30,60 @@ public class TelaBilheteria extends javax.swing.JFrame {
         
         labelQuantidadeCompra.setText("1");
         
-        calculaTotalCompra(Double.parseDouble(labelPreco.getText()), Integer.parseInt(labelQuantidadeCompra.getText()));
+//        calculaTotalCompra(Double.parseDouble(labelPreco.getText()), Integer.parseInt(labelQuantidadeCompra.getText()));
         
-        tfIdCompra.setVisible(false);
-        tfIdCliente.setVisible(false);
-        tfIdSala.setVisible(false);
-        tfIdSessao.setVisible(false);
-        tfIdIngresso.setVisible(false);
+//        tfIdCompra.setVisible(false);
+//        tfIdFilme.setVisible(false);
+//        tfIdCliente.setVisible(false);
+//        tfIdSala.setVisible(false);
+//        tfIdSessao.setVisible(false);
+//        tfIdIngresso.setVisible(false);
     }
     
     private Boolean existeDadosTemporarios(){        
-        if(DadosTemporarios.temObject instanceof ModCompra){
-            int id = ((ModCompra) DadosTemporarios.temObject).getId();
-            Double preco = ((ModCompra) DadosTemporarios.temObject).getPreco();
-            String horario = ((ModCompra) DadosTemporarios.temObject).getHorario();
-            String cliente = DadosTemporarios.clienteCompraBilheteria;
-            String sala = DadosTemporarios.salaCompraBilheteria;
-            String sessao = DadosTemporarios.sessaoCompraBilheteria;
-            String ingresso = DadosTemporarios.ingressoCompraBilheteria;
-            int idCliente = DadosTemporarios.idUsuarioLogado;
-            
-            int proximoId = new DaoCompra().buscarProximoId();
-            
-            tfIdSala.setText(String.valueOf(id));
-            tfIdCliente.setText(String.valueOf(idCliente));
-            tfIdSessao.setText(String.valueOf(id));
-            tfIdIngresso.setText(String.valueOf(id));
-            
-            labelPreco.setText(String.valueOf(preco));
-            labelSala.setText(sala);
-            labelSessao.setText(sessao);
-            
-            DadosTemporarios.temObject = null;
-            DadosTemporarios.salaCompraBilheteria = null;
-            DadosTemporarios.sessaoCompraBilheteria = null;
-            
-            return true;
-        }else
+        try{
+//            if(DadosTemporarios.temObject instanceof ModCompra){
+    //            int id = ((ModCompra) DadosTemporarios.temObject).getId();
+    //            Double preco = ((ModCompra) DadosTemporarios.temObject).getPreco();
+    //            String horario = ((ModCompra) DadosTemporarios.temObject).getHorario();
+    //            String cliente = DadosTemporarios.clienteCompraBilheteria;
+                String filme = DadosTemporarios.filmeCompraBilheteria;
+                
+                String sala = DadosTemporarios.salaCompraBilheteria;
+                String sessao = DadosTemporarios.sessaoCompraBilheteria;
+    //            String ingresso = DadosTemporarios.ingressoCompraBilheteria;
+                int idCliente = DadosTemporarios.idUsuarioLogado;
+
+                int proximoId = new DaoCompra().buscarProximoId();
+
+                ResultSet resultSet = new DaoFilme().listarPorNome(filme);
+                resultSet.next();
+                int idFilme = resultSet.getInt("ID");
+                tfIdFilme.setText(String.valueOf(idFilme));
+                labelNomeFilme.setText(filme);
+                
+//                tfIdSala.setText(String.valueOf(idSala));
+//                tfIdCliente.setText(String.valueOf(idCliente));
+//                tfIdSessao.setText(String.valueOf(idSessao));
+//                tfIdIngresso.setText(String.valueOf(idIngresso));
+
+//                labelNomeFilme.setText(filme);
+    //            labelPreco.setText(String.valueOf(preco));
+                labelSala.setText(sala);
+                labelSessao.setText(sessao);
+
+                DadosTemporarios.temObject = null;
+                DadosTemporarios.filmeCompraBilheteria = null;
+                DadosTemporarios.salaCompraBilheteria = null;
+                DadosTemporarios.sessaoCompraBilheteria = null;
+
+                return true;
+//            }else
+//                return false;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
             return false;
+        }
     }
 
     private void calculaTotalCompra(Double preco, int quantidade){
@@ -297,13 +315,13 @@ public class TelaBilheteria extends javax.swing.JFrame {
                             .addComponent(tfIdCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfIdCompra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfIdFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
-                                .addComponent(labelQuantidadeAtual))))
+                                .addComponent(labelQuantidadeAtual))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -375,11 +393,11 @@ public class TelaBilheteria extends javax.swing.JFrame {
             int idSala = Integer.parseInt(tfIdSala.getText());
             int idSessao = Integer.parseInt(tfIdSessao.getText());
             int idIngresso = Integer.parseInt(tfIdIngresso.getText());
-            String horario = Integer.parseInt(labelSessaoHorario.getText());
-            String tipodeingresso = 
-            String preco =        
+//            String horario = Integer.parseInt(labelSessaoHorario.getText());
+//            String tipodeingresso = 
+//            String preco =        
             
-            daoCompra.inserir(id, idCliente, idFilme, idSala, idSessao, idIngresso, horario, tipodeingresso, preco);
+//            daoCompra.inserir(id, idCliente, idFilme, idSala, idSessao, idIngresso, horario, tipodeingresso, preco);
             
             JOptionPane.showMessageDialog(null, "Obrigado, " + DadosTemporarios.usuarioLogado + ", pela sua compra, seu ingresso foi comprado exitosamente!");
         }catch(Exception e){

@@ -48,8 +48,8 @@ public class DaoCompra {
             sql = 
                 " SELECT                            " +
                 "   C.ID AS ID,                     " +
-                "   C.NOME AS CLIENTE               " +
-                "   F.NOME AS FILME                 " +
+                "   C.NOME AS CLIENTE,              " +
+                "   F.NOME AS FILME,                " +
                 "   S.NOME AS SALA,                 " +
                 "   S.NOME AS SESSAO,               " +
                 "   H.NOME AS HORARIO,              " +
@@ -57,7 +57,7 @@ public class DaoCompra {
                 "   P.PRECO AS PRECO                " +
                 " FROM                              " +
                 "   FILME F ON                      " +
-                " JOIN FILME F ON                   " +
+                " JOIN CINEMA F ON                  " +
                 "   F.ID = C.ID_FILME               " +  
                 " JOIN SALA S ON                    " +
                 "    S.ID = C.ID_SALA               " +
@@ -67,6 +67,64 @@ public class DaoCompra {
                 "   I.ID = C.ID_INGRESSO            " ;
             
             setStatement(getConexao().prepareStatement(sql));
+            
+            setResultado(getStatement().executeQuery());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return getResultado();
+    }
+    
+    public ResultSet listarSessoes(){
+        try{
+            sql = 
+                "   select                          " +
+                "	ses.id as id,               " +
+                "	sal.nome as sala,           " +
+                "	fil.nome as filme,          " +
+                "	ses.data as data,           " +
+                "	ses.horario as horario      " +
+                "   from                            " +
+                "	sessao ses                  " +
+                "   join filme fil on               " +
+                "	fil.id = ses.id_filme       " +
+                "   join salas sal on               " +
+                "	sal.id = ses.id_salas       " +
+                "   where                           " +
+                "	ses.status = 'Ativa'        ";
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            setResultado(getStatement().executeQuery());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return getResultado();
+    }
+    
+    public ResultSet listarSessoesPorId(int id){
+        try{
+            sql = 
+                "   select                          " +
+                "	ses.id as id,               " +
+                "	sal.nome as sala,           " +
+                "	fil.nome as filme,          " +
+                "	ses.data as data,           " +
+                "	ses.horario as horario      " +
+                "   from                            " +
+                "	sessao ses                  " +
+                "   join filme fil on               " +
+                "	fil.id = ses.id_filme       " +
+                "   join salas sal on               " +
+                "	sal.id = ses.id_salas       " +
+                "   where                           " +
+                "	ses.id = ?                  " ;
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setInt(1, id);
             
             setResultado(getStatement().executeQuery());
         }catch(Exception e){
@@ -117,8 +175,8 @@ public class DaoCompra {
             sql = 
                 " SELECT                            " +
                 "   C.ID AS ID,                     " +
-                "   C.NOME AS CLIENTE               " +
-                "   F.NOME AS FILME                 " +
+                "   C.NOME AS CLIENTE,              " +
+                "   F.NOME AS FILME,                " +
                 "   S.NOME AS SALA,                 " +
                 "   S.NOME AS SESSAO,               " +
                 "   H.NOME AS HORARIO,              " +
