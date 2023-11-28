@@ -4,6 +4,7 @@
  */
 package com.mycompany.dao;
 
+import com.mycompany.ferramentas.BancoDeDadosMySql;
 import static com.mycompany.ferramentas.BancoDeDadosMySql.getConexao;
 import static com.mycompany.ferramentas.BancoDeDadosMySql.getResultado;
 import static com.mycompany.ferramentas.BancoDeDadosMySql.getStatement;
@@ -15,7 +16,7 @@ import java.sql.ResultSet;
  *
  * @author elymar.8221
  */
-public class DaoCompra {
+public class DaoCompra extends BancoDeDadosMySql{
     private String sql;
     
     public Boolean inserir(int id, int idCliente, int idFilme, int idSala, int idSessao, int idIngresso, String horario, String tipodeingresso, Double preco){
@@ -57,7 +58,7 @@ public class DaoCompra {
                 "   P.PRECO AS PRECO                " +
                 " FROM                              " +
                 "   FILME F ON                      " +
-                " JOIN CINEMA F ON                  " +
+                " JOIN FILME F ON                  " +
                 "   F.ID = C.ID_FILME               " +  
                 " JOIN SALA S ON                    " +
                 "    S.ID = C.ID_SALA               " +

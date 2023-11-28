@@ -88,7 +88,7 @@
                 <StringItem index="1" value="ID"/>
                 <StringItem index="2" value="GENERO"/>
                 <StringItem index="3" value="NOME"/>
-                <StringItem index="4" value="SIPNOPSE"/>
+                <StringItem index="4" value="SINOPSE"/>
                 <StringItem index="5" value="DIRETOR DO FILME"/>
                 <StringItem index="6" value="DATA DE LAN&#xc7;AMENTO"/>
                 <StringItem index="7" value="DURA&#xc7;&#xc3;O DO FILME"/>
@@ -124,7 +124,7 @@
                     <Column editable="false" title="ID" type="java.lang.Object"/>
                     <Column editable="false" title="GENERO" type="java.lang.Object"/>
                     <Column editable="false" title="NOME" type="java.lang.Object"/>
-                    <Column editable="false" title="SIPNOPSE" type="java.lang.Object"/>
+                    <Column editable="false" title="SINOPSE" type="java.lang.Object"/>
                     <Column editable="false" title="DIRETOR " type="java.lang.Object"/>
                     <Column editable="false" title="DATA DE LAN&#xc7;AMENTO" type="java.lang.Object"/>
                     <Column editable="false" title="DURA&#xc7;&#xc3;O" type="java.lang.Object"/>
@@ -133,42 +133,42 @@
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>

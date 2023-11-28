@@ -4,6 +4,25 @@
  */
 package my.company.visao.outros.funcionarios;
 
+import com.mycompany.ferramentas.BancoDeDadosMySql;
+import com.mycompany.ferramentas.Formularios;
+import com.mycompany.visao.cinema.CadCinema;
+import com.mycompany.visao.cinema.ListCinema;
+import com.mycompany.visao.cliente.CadCliente;
+import com.mycompany.visao.cliente.ListCliente;
+import com.mycompany.visao.compra.ListCompra;
+import com.mycompany.visao.filme.CadFilme;
+import com.mycompany.visao.filme.ListFilme;
+import com.mycompany.visao.genero.CadGenero;
+import com.mycompany.visao.genero.ListGenero;
+import com.mycompany.visao.ingressos.ListIngresso;
+import com.mycompany.visao.salas.CadSala;
+import com.mycompany.visao.salas.ListSala;
+import com.mycompany.visao.sessao.CadSessao;
+import com.mycompany.visao.sessao.ListSessao;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author elymar.8221
@@ -15,6 +34,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        
+        setLocationRelativeTo(null);
+        
+        setExtendedState(MAXIMIZED_BOTH);
+        
+        if (!BancoDeDadosMySql.conectar()){
+            JOptionPane.showMessageDialog(null, "Não foi possível conectar ao banco de dados. O sistema será finalizado.");
+            System.exit(0);
+        }
     }
 
     /**
@@ -26,6 +54,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        labelCinema = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         miCadastro = new javax.swing.JMenu();
         miCadastroCinema = new javax.swing.JMenuItem();
@@ -49,25 +79,61 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SISTEMA DO CINEMA");
 
+        labelCinema.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        labelCinema.setText("StarlineCinema");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jLabel1.setText("Funcionários");
+
         miCadastro.setText("Cadastros");
 
         miCadastroCinema.setText("Cinema");
+        miCadastroCinema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCadastroCinemaActionPerformed(evt);
+            }
+        });
         miCadastro.add(miCadastroCinema);
 
         miCadastroSala.setText("Sala");
+        miCadastroSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCadastroSalaActionPerformed(evt);
+            }
+        });
         miCadastro.add(miCadastroSala);
 
         miCadastroSessao.setText("Sessão");
+        miCadastroSessao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCadastroSessaoActionPerformed(evt);
+            }
+        });
         miCadastro.add(miCadastroSessao);
 
         miCadastroFilme.setText("Filme");
+        miCadastroFilme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCadastroFilmeActionPerformed(evt);
+            }
+        });
         miCadastro.add(miCadastroFilme);
 
         miCadastroGenero.setText("Gênero");
+        miCadastroGenero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCadastroGeneroActionPerformed(evt);
+            }
+        });
         miCadastro.add(miCadastroGenero);
         miCadastro.add(jSeparator1);
 
         miCadastroCliente.setText("Cliente");
+        miCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCadastroClienteActionPerformed(evt);
+            }
+        });
         miCadastro.add(miCadastroCliente);
 
         jMenuBar1.add(miCadastro);
@@ -75,28 +141,68 @@ public class MenuPrincipal extends javax.swing.JFrame {
         miConsulta.setText("Consultas");
 
         miConsultaCinema.setText("Cinema");
+        miConsultaCinema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miConsultaCinemaActionPerformed(evt);
+            }
+        });
         miConsulta.add(miConsultaCinema);
 
         miConsultaSala.setText("Sala");
+        miConsultaSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miConsultaSalaActionPerformed(evt);
+            }
+        });
         miConsulta.add(miConsultaSala);
 
         miConsultaSessao.setText("Sessão");
+        miConsultaSessao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miConsultaSessaoActionPerformed(evt);
+            }
+        });
         miConsulta.add(miConsultaSessao);
 
         miConsultaFilme.setText("Filme");
+        miConsultaFilme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miConsultaFilmeActionPerformed(evt);
+            }
+        });
         miConsulta.add(miConsultaFilme);
 
         miConsultaGenero.setText("Gênero");
+        miConsultaGenero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miConsultaGeneroActionPerformed(evt);
+            }
+        });
         miConsulta.add(miConsultaGenero);
 
         miConsultaIngressos.setText("Ingressos");
+        miConsultaIngressos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miConsultaIngressosActionPerformed(evt);
+            }
+        });
         miConsulta.add(miConsultaIngressos);
         miConsulta.add(jSeparator2);
 
         miConsultaCliente.setText("Cliente");
+        miConsultaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miConsultaClienteActionPerformed(evt);
+            }
+        });
         miConsulta.add(miConsultaCliente);
 
         miConsultaCompra.setText("Compra");
+        miConsultaCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miConsultaCompraActionPerformed(evt);
+            }
+        });
         miConsulta.add(miConsultaCompra);
 
         jMenuBar1.add(miConsulta);
@@ -107,15 +213,123 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 570, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(389, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelCinema, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 457, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(392, Short.MAX_VALUE)
+                .addComponent(labelCinema)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void miCadastroCinemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCadastroCinemaActionPerformed
+        if (Formularios.cadCinema == null)
+            Formularios.cadCinema = new CadCinema();
+        
+        Formularios.cadCinema.setVisible(true);
+    }//GEN-LAST:event_miCadastroCinemaActionPerformed
+
+    private void miConsultaCinemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConsultaCinemaActionPerformed
+        if (Formularios.listCinema == null)
+            Formularios.listCinema = new ListCinema();
+        
+        Formularios.listCinema.setVisible(true);
+    }//GEN-LAST:event_miConsultaCinemaActionPerformed
+
+    private void miCadastroSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCadastroSalaActionPerformed
+        if (Formularios.cadSala == null)
+            Formularios.cadSala = new CadSala();
+        
+        Formularios.cadSala.setVisible(true);
+    }//GEN-LAST:event_miCadastroSalaActionPerformed
+
+    private void miConsultaSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConsultaSalaActionPerformed
+        if (Formularios.listSala == null)
+            Formularios.listSala = new ListSala();
+        
+        Formularios.listSala.setVisible(true);
+    }//GEN-LAST:event_miConsultaSalaActionPerformed
+
+    private void miCadastroSessaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCadastroSessaoActionPerformed
+        if (Formularios.cadSessao == null)
+            Formularios.cadSessao = new CadSessao();
+        
+        Formularios.cadSessao.setVisible(true);
+    }//GEN-LAST:event_miCadastroSessaoActionPerformed
+
+    private void miConsultaSessaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConsultaSessaoActionPerformed
+        if (Formularios.listSessao == null)
+            Formularios.listSessao = new ListSessao();
+        
+        Formularios.listSessao.setVisible(true);
+    }//GEN-LAST:event_miConsultaSessaoActionPerformed
+
+    private void miCadastroFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCadastroFilmeActionPerformed
+        if (Formularios.cadFilme == null)
+            Formularios.cadFilme = new CadFilme();
+        
+        Formularios.cadFilme.setVisible(true);
+    }//GEN-LAST:event_miCadastroFilmeActionPerformed
+
+    private void miConsultaFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConsultaFilmeActionPerformed
+        if (Formularios.listFilme == null)
+            Formularios.listFilme = new ListFilme();
+        
+        Formularios.listFilme.setVisible(true);
+    }//GEN-LAST:event_miConsultaFilmeActionPerformed
+
+    private void miCadastroGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCadastroGeneroActionPerformed
+        if (Formularios.cadGenero == null)
+            Formularios.cadGenero = new CadGenero();
+        
+        Formularios.cadGenero.setVisible(true);
+    }//GEN-LAST:event_miCadastroGeneroActionPerformed
+
+    private void miConsultaGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConsultaGeneroActionPerformed
+        if (Formularios.listGenero == null)
+            Formularios.listGenero = new ListGenero();
+        
+        Formularios.listGenero.setVisible(true);
+    }//GEN-LAST:event_miConsultaGeneroActionPerformed
+
+    private void miConsultaIngressosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConsultaIngressosActionPerformed
+        if (Formularios.listIngresso == null)
+            Formularios.listIngresso = new ListIngresso();
+        
+        Formularios.listIngresso.setVisible(true);
+    }//GEN-LAST:event_miConsultaIngressosActionPerformed
+
+    private void miCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCadastroClienteActionPerformed
+        if (Formularios.cadCliente == null)
+            Formularios.cadCliente = new CadCliente();
+        
+        Formularios.cadCliente.setVisible(true);
+    }//GEN-LAST:event_miCadastroClienteActionPerformed
+
+    private void miConsultaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConsultaClienteActionPerformed
+        if (Formularios.listCliente == null)
+            Formularios.listCliente = new ListCliente();
+        
+        Formularios.listCliente.setVisible(true);
+    }//GEN-LAST:event_miConsultaClienteActionPerformed
+
+    private void miConsultaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConsultaCompraActionPerformed
+        if (Formularios.listCompra == null)
+            Formularios.listCompra = new ListCompra();
+        
+        Formularios.listCompra.setVisible(true);
+    }//GEN-LAST:event_miConsultaCompraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,9 +367,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JLabel labelCinema;
     private javax.swing.JMenu miCadastro;
     private javax.swing.JMenuItem miCadastroCinema;
     private javax.swing.JMenuItem miCadastroCliente;

@@ -146,7 +146,7 @@ public class DaoFilme extends BancoDeDadosMySql{
             sql = 
                 "  SELECT                          " +
                 "   FIL.ID,                        " +
-                "   GEN.NOME AS GENERO,            " +    
+                "   GEN.NOME AS GENERO             " +    
                 "   NOM.NOME AS NOME               " +
                 "   SIP. NOME AS SINOPSE           " +
                 "   DIR.NOME AS DIRETOR            " +
@@ -176,7 +176,7 @@ public class DaoFilme extends BancoDeDadosMySql{
             sql = 
                 "  SELECT                          " +
                 "   FIL.ID,                        " +
-                "   GEN.NOME AS GENERO,            " +    
+                "   GEN.NOME AS GENERO             " +    
                 "   NOM.NOME AS NOME               " +
                 "   SIP.NOME AS SINOPSE            " +
                 "   DIR.NOME AS DIRETOR            " +
@@ -206,7 +206,7 @@ public class DaoFilme extends BancoDeDadosMySql{
             sql = 
                 "  SELECT                          " +
                 "   FIL.ID,                        " +
-                "   GEN.NOME AS GENERO,            " +    
+                "   GEN.NOME AS GENERO             " +    
                 "   NOM.NOME AS NOME               " +
                 "   SIP. NOME AS SINOPSE           " +
                 "   DIR.NOME AS DIRETOR            " +
@@ -236,7 +236,7 @@ public class DaoFilme extends BancoDeDadosMySql{
             sql = 
                 "  SELECT                          " +
                 "   FIL.ID,                        " +
-                "   GEN.NOME AS GENERO,            " +    
+                "   GEN.NOME AS GENERO             " +    
                 "   NOM.NOME AS NOME               " +
                 "   SIP. NOME AS SINOPSE           " +
                 "   DIR.NOME AS DIRETOR            " +
@@ -266,7 +266,7 @@ public class DaoFilme extends BancoDeDadosMySql{
             sql = 
                 "  SELECT                          " +
                 "   FIL.ID,                        " +
-                "   GEN.NOME AS GENERO,            " +    
+                "   GEN.NOME AS GENERO             " +    
                 "   NOM.NOME AS NOME               " +
                 "   SIP. NOME AS SINOPSE           " +
                 "   DIR.NOME AS DIRETOR            " +
@@ -296,7 +296,7 @@ public class DaoFilme extends BancoDeDadosMySql{
             sql = 
                 "  SELECT                          " +
                 "   FIL.ID,                        " +
-                "   GEN.NOME AS GENERO,            " +    
+                "   GEN.NOME AS GENERO             " +    
                 "   NOM.NOME AS NOME               " +
                 "   SIP. NOME AS SINOPSE           " +
                 "   DIR.NOME AS DIRETOR            " +
@@ -326,7 +326,7 @@ public class DaoFilme extends BancoDeDadosMySql{
             sql = 
                 "  SELECT                          " +
                 "   FIL.ID,                        " +
-                "   GEN.NOME AS GENERO,            " +    
+                "   GEN.NOME AS GENERO             " +    
                 "   NOM.NOME AS NOME               " +
                 "   SIP. NOME AS SINOPSE           " +
                 "   DIR.NOME AS DIRETOR            " +

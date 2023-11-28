@@ -35,6 +35,8 @@ public class MenuPrincipalFrontEnd extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Não foi possível conectar ao banco de dados. O sistema será finalizado.");
             System.exit(0);
         }
+        
+        labelUsuarioLogado.setText("");
     }
     
     public void listarTodos(){
@@ -64,9 +66,14 @@ public class MenuPrincipalFrontEnd extends javax.swing.JFrame {
         }
     }
     
-    public void login(){           
-        labelLogin.setText(Constantes.LABEL_SAIR);
+    public void verificaUsuarioLogado(){
+        if(!DadosTemporarios.usuarioLogado.equals("")){
+            labelUsuarioLogado.setText(Constantes.PREFIXO_USUARIO_LOGADO + DadosTemporarios.usuarioLogado);
+            
+            labelLogin.setText(Constantes.LABEL_SAIR);
         }
+    }
+    
    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,6 +88,7 @@ public class MenuPrincipalFrontEnd extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         labelLogin = new javax.swing.JLabel();
         labelCinema = new javax.swing.JLabel();
+        labelUsuarioLogado = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         tfPesquisa = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
@@ -105,6 +113,9 @@ public class MenuPrincipalFrontEnd extends javax.swing.JFrame {
         labelCinema.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         labelCinema.setText("StarlineCinema");
 
+        labelUsuarioLogado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        labelUsuarioLogado.setText("Usuário logado |");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -113,6 +124,8 @@ public class MenuPrincipalFrontEnd extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(labelCinema)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelUsuarioLogado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelLogin)
                 .addContainerGap())
         );
@@ -122,7 +135,8 @@ public class MenuPrincipalFrontEnd extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelLogin)
-                    .addComponent(labelCinema))
+                    .addComponent(labelCinema)
+                    .addComponent(labelUsuarioLogado))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
@@ -402,6 +416,7 @@ public class MenuPrincipalFrontEnd extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCinema;
     private javax.swing.JLabel labelLogin;
+    private javax.swing.JLabel labelUsuarioLogado;
     private javax.swing.JTable tableCompra;
     private javax.swing.JTextField tfPesquisa;
     // End of variables declaration//GEN-END:variables

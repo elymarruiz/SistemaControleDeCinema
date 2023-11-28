@@ -4,8 +4,10 @@
  */
 package com.mycompany.visao.cinema;
 
+import com.mycompany.dao.DaoCidade;
 import com.mycompany.dao.DaoCinema;
 import com.mycompany.ferramentas.DadosTemporarios;
+import com.mycompany.ferramentas.Formularios;
 import com.mycompany.modelo.ModCinema;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
@@ -141,10 +143,15 @@ public class ListCinema extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CONSULTA DE CINEMA");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jcbTipoFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "CIDADE", "CINEMA" }));
+        jcbTipoFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "ID", "CIDADE", "CINEMA" }));
 
         tableCinema.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -243,8 +250,36 @@ public class ListCinema extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void tableCinemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCinemaMouseClicked
+        try{
+            if (evt.getClickCount() == 2){
+                ModCinema modCinema = new ModCinema();
 
+                modCinema.setId(Integer.parseInt(String.valueOf(tableCinema.getValueAt(tableCinema.getSelectedRow(), 0))));
+                modCinema.setIdCidade(Integer.parseInt(String.valueOf(tableCinema.getValueAt(tableCinema.getSelectedRow(), 1))));
+                modCinema.setNome(String.valueOf(tableCinema.getValueAt(tableCinema.getSelectedRow(), 2)));
+
+                DaoCidade daoCidade = new DaoCidade();
+                ResultSet resultSet = daoCidade.listarPorNome(String.valueOf(tableCinema.getValueAt(tableCinema.getSelectedRow(), 2)));
+
+                int idCidade = -1;
+                while(resultSet.next())
+                    idCidade = resultSet.getInt("ID");
+
+                modCinema.setIdCidade(idCidade);
+                
+                DadosTemporarios.temObject = (ModCinema) modCinema;
+
+                CadCinema cadCinema = new CadCinema();
+                cadCinema.setVisible(true);
+            }
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+        }
     }//GEN-LAST:event_tableCinemaMouseClicked
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        Formularios.listCinema = null;
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

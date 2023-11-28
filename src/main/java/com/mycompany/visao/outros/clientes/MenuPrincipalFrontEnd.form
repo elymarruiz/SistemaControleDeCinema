@@ -83,6 +83,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="labelCinema" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="labelUsuarioLogado" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="labelLogin" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -95,6 +97,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="labelLogin" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="labelCinema" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelUsuarioLogado" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="8" max="32767" attributes="0"/>
                   </Group>
@@ -119,6 +122,14 @@
                   <Font name="Segoe UI Black" size="14" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="StarlineCinema"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelUsuarioLogado">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="12" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Usu&#xe1;rio logado |"/>
               </Properties>
             </Component>
           </SubComponents>

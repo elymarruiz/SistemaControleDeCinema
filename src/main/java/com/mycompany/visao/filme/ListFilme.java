@@ -38,7 +38,7 @@ public class ListFilme extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jcbTipoFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "ID", "GENERO", "NOME", "SIPNOPSE", "DIRETOR DO FILME", "DATA DE LANÇAMENTO", "DURAÇÃO DO FILME", "CLASSIFICAÇÃO ETÁRIA" }));
+        jcbTipoFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "ID", "GENERO", "NOME", "SINOPSE", "DIRETOR DO FILME", "DATA DE LANÇAMENTO", "DURAÇÃO DO FILME", "CLASSIFICAÇÃO ETÁRIA" }));
 
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         btnBuscar.setText("Buscar");
@@ -51,7 +51,7 @@ public class ListFilme extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "GENERO", "NOME", "SIPNOPSE", "DIRETOR ", "DATA DE LANÇAMENTO", "DURAÇÃO", "CLASSIFICAÇÃO ETÁRIA"
+                "ID", "GENERO", "NOME", "SINOPSE", "DIRETOR ", "DATA DE LANÇAMENTO", "DURAÇÃO", "CLASSIFICAÇÃO ETÁRIA"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -63,6 +63,16 @@ public class ListFilme extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tableFilme);
+        if (tableFilme.getColumnModel().getColumnCount() > 0) {
+            tableFilme.getColumnModel().getColumn(0).setResizable(false);
+            tableFilme.getColumnModel().getColumn(1).setResizable(false);
+            tableFilme.getColumnModel().getColumn(2).setResizable(false);
+            tableFilme.getColumnModel().getColumn(3).setResizable(false);
+            tableFilme.getColumnModel().getColumn(4).setResizable(false);
+            tableFilme.getColumnModel().getColumn(5).setResizable(false);
+            tableFilme.getColumnModel().getColumn(6).setResizable(false);
+            tableFilme.getColumnModel().getColumn(7).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

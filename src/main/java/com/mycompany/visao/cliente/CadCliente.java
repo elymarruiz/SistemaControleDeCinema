@@ -4,6 +4,14 @@
  */
 package com.mycompany.visao.cliente;
 
+import com.mycompany.dao.DaoCliente;
+import com.mycompany.ferramentas.Constantes;
+import com.mycompany.ferramentas.DadosTemporarios;
+import com.mycompany.ferramentas.Formularios;
+import com.mycompany.modelo.ModCliente;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author elymar.8221
@@ -14,9 +22,92 @@ public class CadCliente extends javax.swing.JFrame {
      * Creates new form CadCliente
      */
     public CadCliente() {
-        initComponents();
+        initComponents();       
     }
-
+    
+    private Boolean existeDadosTemporarios(){        
+        if(DadosTemporarios.temObject instanceof ModCliente){
+            int id = ((ModCliente) DadosTemporarios.temObject).getId();
+            String nome = ((ModCliente) DadosTemporarios.temObject).getNome();
+            String sobrenome = ((ModCliente) DadosTemporarios.temObject).getSobrenome();
+            String genero = ((ModCliente) DadosTemporarios.temObject).getGenero();
+            String email = ((ModCliente) DadosTemporarios.temObject).getEmail();
+            String cpf = ((ModCliente) DadosTemporarios.temObject).getCpf();
+            
+            tfId.setText(String.valueOf(id));
+            tfNome.setText(nome);
+            tfSobrenome.setText(sobrenome);
+            tfEmail.setText(email);
+            tfCpf.setText(cpf);
+        } 
+        return true;
+    }     
+    
+    private void inserir(){
+        DaoCliente daoCliente = new DaoCliente();
+        
+        if (daoCliente.inserir(Integer.parseInt(tfId.getText()), tfNome.getText(), tfSobrenome.getText(), (String) jcbGenero.getSelectedItem(), tfEmail.getText(), tfCpf.getText(), tfUsuario.getText(), String.valueOf(pfSenha.getPassword()))){
+            JOptionPane.showMessageDialog(null, "Cliente salvo com sucesso!");
+            
+//            tfId.setText(String.valueOf(daoPessoa.buscarProximoId()));
+//            tfIdEndereco.setText(String.valueOf(daoEndereco.buscarProximoId()));
+            tfNome.setText("");
+            tfSobrenome.setText("");
+            tfEmail.setText("");
+            tfCpf.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "Não foi possível salvar o cliente!");
+        }
+    }
+    
+    private void alterar(){
+        DaoCliente daoCliente = new DaoCliente();
+        
+        if (daoCliente.alterar(Integer.parseInt(tfId.getText()), tfNome.getText(), tfSobrenome.getText(), jcbGenero.getSelectedItem(), tfEmail.getText(), tfCpf.getText(), tfUsuario.getText()))
+        if (daoCliente.alterar(Integer.parseInt( tfId.getText()), tfNome.getText(), tfSobrenome.getText(), (String) jcbGenero.getSelectedItem(), tfEmail.getText(), tfCpf.getText(), tfUsuario.getText(), String.valueOf(pfSenha.getPassword()))){
+            JOptionPane.showMessageDialog(null, "Cliente alterado com sucesso!");
+                      
+            tfNome.setText("");
+            tfSobrenome.setText("");
+            tfEmail.setText("");
+            tfCpf.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "Não foi possível alterar o cliente!");
+        }
+        
+        ((ListCliente) Formularios.listCliente).listarTodos();
+        
+        dispose();
+    }
+    
+    private void excluir(){
+        DaoCliente daoCliente = new DaoCliente();
+        
+        if (daoCliente.excluir(Integer.parseInt(tfId.getText())))
+            JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso!");
+        else
+            JOptionPane.showMessageDialog(null, "Não foi possível excluir o cliente!");
+        
+        ((ListCliente) Formularios.listCliente).listarTodos();
+        
+        dispose();
+    }
+    
+    private boolean camposObrigatoriosPreenchidos(JTextField campos[]){
+        boolean b = true;
+        
+        for(int i = 0; i < campos.length; i++){
+            if(campos[i].getText().equals("")){
+                JOptionPane.showMessageDialog(null, "O campo " + campos[i].getToolTipText() + " é obrigatório!");
+                campos[i].requestFocus();
+                b = false;
+                break;
+            }
+        }
+        
+        return b;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,7 +126,6 @@ public class CadCliente extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         tfSobrenome = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        tfGenero = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         tfEmail = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -44,12 +134,18 @@ public class CadCliente extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         pfSenha = new javax.swing.JPasswordField();
-        pfConfirmacao = new javax.swing.JPasswordField();
-        btnAcao1 = new javax.swing.JButton();
+        pfConfirmacaoSenha = new javax.swing.JPasswordField();
+        btnAcao = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
+        jcbGenero = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CADASTRO DE CLIENTE");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -80,17 +176,17 @@ public class CadCliente extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Sitka Display", 1, 24)); // NOI18N
         jLabel11.setText("Confirmação de senha");
 
-        pfConfirmacao.addActionListener(new java.awt.event.ActionListener() {
+        pfConfirmacaoSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pfConfirmacaoActionPerformed(evt);
+                pfConfirmacaoSenhaActionPerformed(evt);
             }
         });
 
-        btnAcao1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        btnAcao1.setText("Salvar");
-        btnAcao1.addActionListener(new java.awt.event.ActionListener() {
+        btnAcao.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        btnAcao.setText("Salvar");
+        btnAcao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAcao1ActionPerformed(evt);
+                btnAcaoActionPerformed(evt);
             }
         });
 
@@ -102,6 +198,8 @@ public class CadCliente extends javax.swing.JFrame {
             }
         });
 
+        jcbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino", "Prefiro não especificar" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -112,23 +210,11 @@ public class CadCliente extends javax.swing.JFrame {
                     .addComponent(tfCpf, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(tfNome)
                     .addComponent(tfSobrenome)
-                    .addComponent(tfGenero)
                     .addComponent(tfEmail)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAcao1)
+                        .addComponent(btnAcao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnExcluir))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(tfUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
@@ -139,7 +225,19 @@ public class CadCliente extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addGap(0, 86, Short.MAX_VALUE))
-                            .addComponent(pfConfirmacao))))
+                            .addComponent(pfConfirmacaoSenha)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -160,7 +258,7 @@ public class CadCliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -180,10 +278,10 @@ public class CadCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pfConfirmacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pfConfirmacaoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAcao1)
+                    .addComponent(btnAcao)
                     .addComponent(btnExcluir))
                 .addContainerGap())
         );
@@ -202,17 +300,46 @@ public class CadCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pfConfirmacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfConfirmacaoActionPerformed
+    private void pfConfirmacaoSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfConfirmacaoSenhaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_pfConfirmacaoActionPerformed
+    }//GEN-LAST:event_pfConfirmacaoSenhaActionPerformed
 
-    private void btnAcao1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcao1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAcao1ActionPerformed
+    private void btnAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcaoActionPerformed
+        String senha = String.valueOf(pfSenha.getPassword());
+        String confirmacaoSenha = String.valueOf(pfConfirmacaoSenha.getPassword());
+        
+        
+        if(senha.equals(confirmacaoSenha)){
+            DaoCliente daoCliente = new DaoCliente();
+
+            if(camposObrigatoriosPreenchidos(new JTextField[]{tfNome, tfSobrenome, tfEmail, tfCpf, tfUsuario})){
+                if (btnAcao.getText() == Constantes.BTN_SALVAR_TEXT){;
+                    inserir();
+
+                    tfId.setText(String.valueOf(daoCliente.buscarProximoId()));
+                }else if (btnAcao.getText() == Constantes.BTN_ALTERAR_TEXT){            
+                    alterar();
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, Constantes.CONFIRMACAO_SENHA_DIFERENTE);
+        }
+    }//GEN-LAST:event_btnAcaoActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int escolha = 
+                JOptionPane.showConfirmDialog(
+                        null, 
+                        "Deseja realmente excluir a pessoa?");
         
+        if(escolha == JOptionPane.YES_OPTION){
+            excluir();
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+         Formularios.cadCliente = null;
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -250,7 +377,7 @@ public class CadCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAcao1;
+    private javax.swing.JButton btnAcao;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -262,11 +389,11 @@ public class CadCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField pfConfirmacao;
+    private javax.swing.JComboBox<String> jcbGenero;
+    private javax.swing.JPasswordField pfConfirmacaoSenha;
     private javax.swing.JPasswordField pfSenha;
     private javax.swing.JTextField tfCpf;
     private javax.swing.JTextField tfEmail;
-    private javax.swing.JTextField tfGenero;
     private javax.swing.JTextField tfId;
     private javax.swing.JTextField tfNome;
     private javax.swing.JTextField tfSobrenome;

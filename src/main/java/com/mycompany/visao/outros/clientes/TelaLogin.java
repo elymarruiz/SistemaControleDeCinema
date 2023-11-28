@@ -73,6 +73,12 @@ public class TelaLogin extends javax.swing.JDialog {
             }
         });
 
+        pfSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pfSenhaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -164,6 +170,10 @@ public class TelaLogin extends javax.swing.JDialog {
         Formularios.telaAlteracaoSenha.setModal(true);
         Formularios.telaAlteracaoSenha.setVisible(true);
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void pfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pfSenhaActionPerformed
 
     /**
      * @param args the command line arguments
