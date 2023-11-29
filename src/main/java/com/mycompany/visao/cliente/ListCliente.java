@@ -353,7 +353,7 @@ public class ListCliente extends javax.swing.JFrame {
                 modCliente.setCpf(String.valueOf(tableCliente.getValueAt(tableCliente.getSelectedRow(), 9)));
 
                 
-                DadosTemporarios.temObject = (ModCliente) modCliente;
+                DadosTemporarios.temObjectFilme = (ModCliente) modCliente;
                 
                 CadCliente cadCliente = new CadCliente();
                 cadCliente.setVisible(true);

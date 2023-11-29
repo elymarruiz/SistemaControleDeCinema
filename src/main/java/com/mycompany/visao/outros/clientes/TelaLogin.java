@@ -43,11 +43,16 @@ public class TelaLogin extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         tfUsuario = new javax.swing.JTextField();
         btnEntrar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        labelEsqueciMinhaSenha = new javax.swing.JLabel();
         pfSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Informe seu usuário e senha");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -65,11 +70,11 @@ public class TelaLogin extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jLabel1.setText("Esqueci minha senha");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        labelEsqueciMinhaSenha.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        labelEsqueciMinhaSenha.setText("Esqueci minha senha");
+        labelEsqueciMinhaSenha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                labelEsqueciMinhaSenhaMouseClicked(evt);
             }
         });
 
@@ -92,7 +97,7 @@ public class TelaLogin extends javax.swing.JDialog {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                            .addComponent(labelEsqueciMinhaSenha))
                         .addGap(0, 369, Short.MAX_VALUE))
                     .addComponent(pfSenha))
                 .addContainerGap())
@@ -109,7 +114,7 @@ public class TelaLogin extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(labelEsqueciMinhaSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
                 .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -163,17 +168,21 @@ public class TelaLogin extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void labelEsqueciMinhaSenhaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelEsqueciMinhaSenhaMouseClicked
         if (Formularios.telaAlteracaoSenha == null)
             Formularios.telaAlteracaoSenha = new TelaAlteracaoSenha();
 
         Formularios.telaAlteracaoSenha.setModal(true);
         Formularios.telaAlteracaoSenha.setVisible(true);
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_labelEsqueciMinhaSenhaMouseClicked
 
     private void pfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pfSenhaActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        Formularios.telaLogin = null;
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -212,10 +221,10 @@ public class TelaLogin extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelEsqueciMinhaSenha;
     private javax.swing.JPasswordField pfSenha;
     private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables

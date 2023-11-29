@@ -4,6 +4,13 @@
  */
 package com.mycompany.visao.genero;
 
+import com.mycompany.dao.DaoGenero;
+import com.mycompany.ferramentas.Constantes;
+import com.mycompany.ferramentas.DadosTemporarios;
+import com.mycompany.ferramentas.Formularios;
+import com.mycompany.modelo.ModGenero;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author elymar.8221
@@ -15,7 +22,89 @@ public class CadGenero extends javax.swing.JFrame {
      */
     public CadGenero() {
         initComponents();
+        
+        if(!existeDadosTemporarios()){
+            DaoGenero daoGenero = new DaoGenero();
+
+            int id = daoGenero.buscarProximoId(); 
+            if (id >= 0)
+                tfId.setText(String.valueOf(id));
+            
+            btnAcao.setText(Constantes.BTN_SALVAR_TEXT);
+            btnExcluir.setVisible(false);
+        }else{
+            btnAcao.setText(Constantes.BTN_ALTERAR_TEXT);
+            btnExcluir.setVisible(true);
+        }
+        
+        setLocationRelativeTo(null);
+        
+        tfId.setEnabled(false);
     }
+    
+    private Boolean existeDadosTemporarios(){        
+        if(DadosTemporarios.temObjectFilme instanceof ModGenero){
+            int id = ((ModGenero) DadosTemporarios.temObjectFilme).getId();
+            String nome = ((ModGenero) DadosTemporarios.temObjectFilme).getNome();
+            
+            tfId.setText(String.valueOf(id));
+            tfNome.setText(nome);
+            
+            DadosTemporarios.temObjectFilme = null;
+            
+            return true;
+        }else
+            return false;
+    }
+    
+    private void inserir(){
+        DaoGenero daoGenero = new DaoGenero();
+        
+        if (daoGenero.inserir(Integer.parseInt(tfId.getText()), tfNome.getText())){
+            JOptionPane.showMessageDialog(null, "Genero salvo com sucesso!");
+            
+            tfId.setText(String.valueOf(daoGenero.buscarProximoId()));
+            tfNome.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "Não foi possível salvar o genero!");
+        }
+    }
+    
+    private void alterar(){
+        DaoGenero daoGenero = new DaoGenero();
+        
+        if (daoGenero.alterar(Integer.parseInt(tfId.getText()), tfNome.getText())){
+            JOptionPane.showMessageDialog(null, "Genero alterado com sucesso!");
+            
+            tfId.setText("");
+            tfNome.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "Não foi possível alterar o genero!");
+        }
+        
+        ((ListGenero) Formularios.listGenero).listarTodos();
+        
+        dispose();
+    }
+    
+    private void excluir(){
+        DaoGenero daoGenero = new DaoGenero();
+        
+        if (daoGenero.excluir(Integer.parseInt(tfId.getText()))){
+            JOptionPane.showMessageDialog(null, "Genero " + tfNome.getText() + " excluído com sucesso!");
+            
+            tfId.setText("");
+            tfNome.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "Não foi possível excluir o genero!");
+        }
+        
+        ((ListGenero) Formularios.listGenero).listarTodos();
+        
+        dispose();
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,7 +120,7 @@ public class CadGenero extends javax.swing.JFrame {
         tfId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         tfNome = new javax.swing.JTextField();
-        btnAcao1 = new javax.swing.JButton();
+        btnAcao = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -45,8 +134,8 @@ public class CadGenero extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Sitka Display", 1, 24)); // NOI18N
         jLabel3.setText("Nome");
 
-        btnAcao1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        btnAcao1.setText("Salvar");
+        btnAcao.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        btnAcao.setText("Salvar");
 
         btnExcluir.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         btnExcluir.setText("Excluir");
@@ -60,7 +149,7 @@ public class CadGenero extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfNome)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAcao1)
+                        .addComponent(btnAcao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 415, Short.MAX_VALUE)
                         .addComponent(btnExcluir))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -84,7 +173,7 @@ public class CadGenero extends javax.swing.JFrame {
                 .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAcao1)
+                    .addComponent(btnAcao)
                     .addComponent(btnExcluir))
                 .addContainerGap())
         );
@@ -142,7 +231,7 @@ public class CadGenero extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAcao1;
+    private javax.swing.JButton btnAcao;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

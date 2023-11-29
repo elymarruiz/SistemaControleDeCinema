@@ -4,6 +4,12 @@
  */
 package com.mycompany.visao.genero;
 
+import com.mycompany.dao.DaoGenero;
+import com.mycompany.ferramentas.DadosTemporarios;
+import com.mycompany.modelo.ModGenero;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author elymar.8221
@@ -15,6 +21,82 @@ public class ListGenero extends javax.swing.JFrame {
      */
     public ListGenero() {
         initComponents();
+        
+        setLocationRelativeTo(null);
+        
+        listarTodos();
+    }
+
+    public void listarTodos(){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableGenero.getModel();
+            
+            tableGenero.setModel(defaultTableModel);
+
+            DaoGenero daoGenero = new DaoGenero();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoGenero.listarTodos();
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String nome = resultSet.getString(2);
+                
+                defaultTableModel.addRow(new Object[]{id, nome});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorId(int pId){
+        try{
+            //Define o model da tabela.
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableGenero.getModel();
+            
+            tableGenero.setModel(defaultTableModel);
+
+            DaoGenero daoGenero = new DaoGenero();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoGenero.listarPorId(pId);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String nome = resultSet.getString(2);
+                
+                defaultTableModel.addRow(new Object[]{id, nome});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorNome(String pNome){
+        try{
+            //Define o model da tabela.
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableGenero.getModel();
+            
+            tableGenero.setModel(defaultTableModel);
+
+            DaoGenero daoGenero = new DaoGenero();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoGenero.listarPorNome(pNome);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String nome = resultSet.getString(2);
+                
+                defaultTableModel.addRow(new Object[]{id, nome});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -57,6 +139,11 @@ public class ListGenero extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tableGenero.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableGeneroMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tableGenero);
@@ -108,6 +195,20 @@ public class ListGenero extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tableGeneroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableGeneroMouseClicked
+//        if (evt.getClickCount() == 2){
+//            ModGenero modGenero = new ModGenero();
+//
+//            modGenero.setId(Integer.parseInt(String.valueOf(tableMarca.getValueAt(tableMarca.getSelectedRow(), 0))));
+//            modGenero.setNome(String.valueOf(tableMarca.getValueAt(tableMarca.getSelectedRow(), 1)));
+//
+//            DadosTemporarios.temObject = (ModGenero) modMarca;
+//
+//            CadGenero cadGenero = new CadGenero();
+//            cadGenero.setVisible(true);
+//        }
+    }//GEN-LAST:event_tableGeneroMouseClicked
 
     /**
      * @param args the command line arguments

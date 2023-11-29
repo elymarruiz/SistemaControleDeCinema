@@ -25,6 +25,9 @@ public class ModSessao {
         this.status = status;
     }
 
+    public ModSessao() {
+    }
+
     public int getId() {
         return id;
     }

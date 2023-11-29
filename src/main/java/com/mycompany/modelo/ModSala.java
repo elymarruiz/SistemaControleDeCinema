@@ -23,6 +23,9 @@ public class ModSala {
         this.quantidadeassentos = quantidadeassentos;
     }
 
+    public ModSala() {
+    }
+
     public int getId() {
         return id;
     }

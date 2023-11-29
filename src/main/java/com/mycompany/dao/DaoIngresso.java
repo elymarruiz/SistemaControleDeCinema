@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class DaoIngresso extends BancoDeDadosMySql{
     private String sql;
     
-    public Boolean inserir(int id, String regular, String meiaentrada , String crianca, String idoso, String preco){
+    public Boolean inserir(int id, String regular, String meiaentrada , String crianca, String idoso, Double preco){
         try{
             sql = "INSERT INTO INGRESSO (ID, REGULAR, MEIAENTRADA, CRIANÇA, IDOSO, PREÇO) VALUES (?, ?, ?, ?, ?, ?)";
             
@@ -31,7 +31,7 @@ public class DaoIngresso extends BancoDeDadosMySql{
             getStatement().setString(3, meiaentrada);
             getStatement().setString(4, crianca);
             getStatement().setString(5, idoso);
-            getStatement().setString(6, preco);
+            getStatement().setDouble(6, preco);
             
             getStatement().executeUpdate();
             
@@ -42,7 +42,7 @@ public class DaoIngresso extends BancoDeDadosMySql{
         }
     }
     
-    public Boolean alterar(int id, String regular, String meiaentrada , String crianca, String idoso, String preco){
+    public Boolean alterar(int id, String regular, String meiaentrada , String crianca, String idoso, Double preco){
         try{
             sql = "UPDATE INGRESSO SET REGULAR = ?, MEIA ENTRADA = ?, CRIANÇA = ?, IDOSO = ?, PREÇO = ? WHERE ID = ?";
             
@@ -53,7 +53,7 @@ public class DaoIngresso extends BancoDeDadosMySql{
             getStatement().setString(2, meiaentrada);
             getStatement().setString(3, crianca);
             getStatement().setString(4, idoso);
-            getStatement().setString(5, preco);
+            getStatement().setDouble(6, preco);
             
             getStatement().executeUpdate();
             
@@ -86,15 +86,10 @@ public class DaoIngresso extends BancoDeDadosMySql{
             sql = 
                 " SELECT                              " +
                 "   I.ID AS ID,                       " +
-                "   REG.NOME AS REGULAR               " +
-                "   MEI.NOME AS MEIAENTRADA,          " +
-                "   CRI.NOME AS CRIANÇA               " +
-                "   IDO.NOME AS IDOSO                 " +
-                "   PRE.PREÇO AS PREÇO                " +
+                "   I.NOME AS TIPO,                   " +
+                "   I.PRECO_INGRESSO AS PRECO         " +
                 " FROM                                " +
-                "   INGRESSO I                        " +
-                " JOIN INGRESSO I ON                  " +
-                "   I.ID = I.ID_INGRESSO              " ;
+                "   INGRESSOS I                       " ;
             
             setStatement(getConexao().prepareStatement(sql));
             
@@ -133,26 +128,20 @@ public class DaoIngresso extends BancoDeDadosMySql{
         return getResultado();
     }
     
-    public ResultSet listarPorIngressoRegular(String regular){
+    public ResultSet listarPorTipo(String tipo){
         try{
             sql = 
                 " SELECT                              " +
                 "   I.ID AS ID,                       " +
-                "   REG.NOME AS REGULAR               " +
-                "   MEI.NOME AS MEIAENTRADA,          " +
-                "   CRI.NOME AS CRIANÇA               " +
-                "   IDO.NOME AS IDOSO                 " +
-                "   PRE.PREÇO AS PREÇO                " +
+                "   I.NOME AS TIPO,                   " +
+                "   I.PRECO_INGRESSO AS PRECO         " +
                 " FROM                                " +
-                "   INGRESSO I                        " +
-                " JOIN INGRESSO I ON                  " +
-                "   I.ID = I.ID_INGRESSO              " +
-                " WHERE                               " +
-                "   REG.NOME LIKE ?                   " ;
+                "   INGRESSOS I                       " +
+                " WHERE I.NOME LIKE ?                 " ;
             
             setStatement(getConexao().prepareStatement(sql));
             
-            getStatement().setString(2, regular + "%");
+            getStatement().setString(1, tipo + "%");
             
             setResultado(getStatement().executeQuery());
         }catch(Exception e){
@@ -249,7 +238,7 @@ public class DaoIngresso extends BancoDeDadosMySql{
         return getResultado();
     }
     
-    public ResultSet listarPorPrecoMaiorQue(String preco){
+    public ResultSet listarPorPrecoMaiorQue(Double preco){
         try{
             sql = 
                 " SELECT                              " +
@@ -268,7 +257,7 @@ public class DaoIngresso extends BancoDeDadosMySql{
             
             setStatement(getConexao().prepareStatement(sql));
             
-            getStatement().setString(6, preco);
+            getStatement().setDouble(6, preco);
             
             setResultado(getStatement().executeQuery());
         }catch(Exception e){
@@ -278,7 +267,7 @@ public class DaoIngresso extends BancoDeDadosMySql{
         return getResultado();
     }
     
-    public ResultSet listarPorPrecoMenorQue(String preco){
+    public ResultSet listarPorPrecoMenorQue(Double preco){
         try{
             sql = 
                 " SELECT                              " +
@@ -297,7 +286,7 @@ public class DaoIngresso extends BancoDeDadosMySql{
             
             setStatement(getConexao().prepareStatement(sql));
             
-            getStatement().setString(6, preco);
+            getStatement().setDouble(6, preco);
             
             setResultado(getStatement().executeQuery());
         }catch(Exception e){
@@ -307,7 +296,7 @@ public class DaoIngresso extends BancoDeDadosMySql{
         return getResultado();
     }
     
-    public ResultSet listarPorPrecoIgualA(String preco){
+    public ResultSet listarPorPrecoIgualA(Double preco){
         try{
             sql = 
                 " SELECT                              " +
@@ -325,7 +314,7 @@ public class DaoIngresso extends BancoDeDadosMySql{
             
             setStatement(getConexao().prepareStatement(sql));
             
-            getStatement().setString(6, preco);
+            getStatement().setDouble(6, preco);
             
             setResultado(getStatement().executeQuery());
         }catch(Exception e){

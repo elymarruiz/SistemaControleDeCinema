@@ -29,6 +29,9 @@ public class ModFilme {
         this.classificacaoetaria = classificacaoetaria;
     }
 
+    public ModFilme() {
+    }
+
     public int getId() {
         return id;
     }

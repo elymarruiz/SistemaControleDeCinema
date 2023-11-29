@@ -6,9 +6,13 @@ package com.mycompany.visao.outros.clientes;
 
 import com.mycompany.dao.DaoCompra;
 import com.mycompany.dao.DaoFilme;
+import com.mycompany.dao.DaoIngresso;
 import com.mycompany.ferramentas.DadosTemporarios;
 import com.mycompany.ferramentas.Formularios;
 import com.mycompany.modelo.ModCompra;
+import com.mycompany.modelo.ModFilme;
+import com.mycompany.modelo.ModSala;
+import com.mycompany.modelo.ModSessao;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
@@ -26,56 +30,68 @@ public class TelaBilheteria extends javax.swing.JFrame {
         
         setLocationRelativeTo(null);
         
+        carregarTiposIngressos();
+        recuperaIdTipoIngresso();
+        
+        tfIdCliente.setText(String.valueOf(DadosTemporarios.idUsuarioLogado));
+        
         existeDadosTemporarios();
         
         labelQuantidadeCompra.setText("1");
         
+        calculaTotalCompra(Double.parseDouble(labelPreco.getText()), Integer.parseInt(labelQuantidadeCompra.getText()));
+        
+        
 //        calculaTotalCompra(Double.parseDouble(labelPreco.getText()), Integer.parseInt(labelQuantidadeCompra.getText()));
         
-//        tfIdCompra.setVisible(false);
-//        tfIdFilme.setVisible(false);
-//        tfIdCliente.setVisible(false);
-//        tfIdSala.setVisible(false);
-//        tfIdSessao.setVisible(false);
-//        tfIdIngresso.setVisible(false);
+        tfIdCompra.setVisible(false);
+        tfIdFilme.setVisible(false);
+        tfIdCliente.setVisible(false);
+        tfIdSala.setVisible(false);
+        tfIdSessao.setVisible(false);
+        tfIdIngresso.setVisible(false);
     }
     
     private Boolean existeDadosTemporarios(){        
         try{
-//            if(DadosTemporarios.temObject instanceof ModCompra){
-    //            int id = ((ModCompra) DadosTemporarios.temObject).getId();
-    //            Double preco = ((ModCompra) DadosTemporarios.temObject).getPreco();
-    //            String horario = ((ModCompra) DadosTemporarios.temObject).getHorario();
-    //            String cliente = DadosTemporarios.clienteCompraBilheteria;
-                String filme = DadosTemporarios.filmeCompraBilheteria;
+////            if(DadosTemporarios.temObject instanceof ModCompra){
+//    //            int id = ((ModCompra) DadosTemporarios.temObject).getId();
+//    //            Double preco = ((ModCompra) DadosTemporarios.temObject).getPreco();
+//    //            String horario = ((ModCompra) DadosTemporarios.temObject).getHorario();
+//    //            String cliente = DadosTemporarios.clienteCompraBilheteria;
+//                String filme = DadosTemporarios.filmeCompraBilheteria;
+//                
+//                String sala = DadosTemporarios.salaCompraBilheteria;
+//                String sessao = DadosTemporarios.sessaoCompraBilheteria;
+//    //            String ingresso = DadosTemporarios.ingressoCompraBilheteria;
+//                int idCliente = DadosTemporarios.idUsuarioLogado;
+//
+//                int proximoId = new DaoCompra().buscarProximoId();
+//
+//                ResultSet resultSet = new DaoFilme().listarPorNome(filme);
+//                resultSet.next();
+//                int idFilme = resultSet.getInt("ID");
+//                tfIdFilme.setText(String.valueOf(idFilme));
+//                
+////                tfIdSala.setText(String.valueOf(idSala));
+////                tfIdCliente.setText(String.valueOf(idCliente));
+////                tfIdSessao.setText(String.valueOf(idSessao));
+////                tfIdIngresso.setText(String.valueOf(idIngresso));
+//
+////                labelNomeFilme.setText(filme);
+//    //            labelPreco.setText(String.valueOf(preco));
+//                labelSala.setText(sala);
+//                labelSessao.setText(sessao);
+//
+//                DadosTemporarios.temObjectFilme = null;
+//                DadosTemporarios.filmeCompraBilheteria = null;
+//                DadosTemporarios.salaCompraBilheteria = null;
+//                DadosTemporarios.sessaoCompraBilheteria = null;
+
+                labelNomeFilme.setText(((ModFilme) DadosTemporarios.temObjectFilme).getNome());
+                labelNomeSala.setText(((ModSala) DadosTemporarios.tempObjectSala).getNome());
+                labelSessaoHorario.setText(((ModSessao) DadosTemporarios.tempObjectSessao).getHorario());
                 
-                String sala = DadosTemporarios.salaCompraBilheteria;
-                String sessao = DadosTemporarios.sessaoCompraBilheteria;
-    //            String ingresso = DadosTemporarios.ingressoCompraBilheteria;
-                int idCliente = DadosTemporarios.idUsuarioLogado;
-
-                int proximoId = new DaoCompra().buscarProximoId();
-
-                ResultSet resultSet = new DaoFilme().listarPorNome(filme);
-                resultSet.next();
-                int idFilme = resultSet.getInt("ID");
-                tfIdFilme.setText(String.valueOf(idFilme));
-                
-//                tfIdSala.setText(String.valueOf(idSala));
-//                tfIdCliente.setText(String.valueOf(idCliente));
-//                tfIdSessao.setText(String.valueOf(idSessao));
-//                tfIdIngresso.setText(String.valueOf(idIngresso));
-
-//                labelNomeFilme.setText(filme);
-    //            labelPreco.setText(String.valueOf(preco));
-                labelSala.setText(sala);
-                labelSessao.setText(sessao);
-
-                DadosTemporarios.temObject = null;
-                DadosTemporarios.filmeCompraBilheteria = null;
-                DadosTemporarios.salaCompraBilheteria = null;
-                DadosTemporarios.sessaoCompraBilheteria = null;
-
                 return true;
 //            }else
 //                return false;
@@ -86,9 +102,11 @@ public class TelaBilheteria extends javax.swing.JFrame {
     }
 
     private void calculaTotalCompra(Double preco, int quantidade){
-        Double total = preco * quantidade;
-        
-        labelTotalCompra.setText(String.valueOf(total));
+        try{
+            Double total = preco * quantidade;
+
+            labelTotalCompra.setText(String.valueOf(total));
+        }catch(Exception e){}
     }
     
     private void adicionaUnidade(){
@@ -98,6 +116,8 @@ public class TelaBilheteria extends javax.swing.JFrame {
         
         labelQuantidadeAtual.setText(String.valueOf(qtdeAtual));
         labelQuantidadeCompra.setText(String.valueOf(qtdeAtual));
+        
+        calculaTotalCompra(Double.parseDouble(labelPreco.getText()), qtdeAtual);
     }
     
     private void diminuirUnidade() {
@@ -108,6 +128,45 @@ public class TelaBilheteria extends javax.swing.JFrame {
 
             labelQuantidadeAtual.setText(String.valueOf(qtdeAtual));
             labelQuantidadeCompra.setText(String.valueOf(qtdeAtual));
+        
+            calculaTotalCompra(Double.parseDouble(labelPreco.getText()), qtdeAtual);
+        }
+    }
+    
+    public void carregarTiposIngressos(){
+        try{
+            DaoIngresso daoIngresso = new DaoIngresso();
+
+            ResultSet resultSet = daoIngresso.listarTodos();
+
+            while(resultSet.next())
+                jcbTipoDeIngresso.addItem(resultSet.getString("TIPO"));
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    private void recuperaIdTipoIngresso(){
+        try{
+            DaoIngresso daoIngresso = new DaoIngresso();
+            ResultSet resultSet = daoIngresso.listarPorTipo(jcbTipoDeIngresso.getSelectedItem().toString());
+            
+            resultSet.next();
+            tfIdIngresso.setText(resultSet.getString("ID"));
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    
+    private void recuperaPrecoTipoIngresso(){
+        try{
+            DaoIngresso daoIngresso = new DaoIngresso();
+            ResultSet resultSet = daoIngresso.listarPorTipo(jcbTipoDeIngresso.getSelectedItem().toString());
+            
+            resultSet.next();
+            labelPreco.setText(resultSet.getString("PRECO"));
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
     
@@ -149,6 +208,8 @@ public class TelaBilheteria extends javax.swing.JFrame {
         tfIdCompra = new javax.swing.JTextField();
         tfIdFilme = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
+        labelNomeFilme = new javax.swing.JLabel();
+        labelNomeSala = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("BILHETERIA");
@@ -198,6 +259,12 @@ public class TelaBilheteria extends javax.swing.JFrame {
         labelSala.setFont(new java.awt.Font("Sitka Display", 1, 24)); // NOI18N
         labelSala.setText("Sala");
 
+        jcbTipoDeIngresso.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbTipoDeIngressoItemStateChanged(evt);
+            }
+        });
+
         jLabel12.setFont(new java.awt.Font("Sitka Display", 1, 24)); // NOI18N
         jLabel12.setText("Preço");
 
@@ -234,6 +301,12 @@ public class TelaBilheteria extends javax.swing.JFrame {
 
         tfIdFilme.setText("idFilme");
 
+        labelNomeFilme.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        labelNomeFilme.setText("nomeFilme");
+
+        labelNomeSala.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        labelNomeSala.setText("nomeSala");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -244,50 +317,65 @@ public class TelaBilheteria extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnComprar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jcbTipoDeIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfIdSala, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfIdIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addComponent(tfIdFilme)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfIdCompra)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
-                        .addGap(28, 28, 28)
-                        .addComponent(labelQuantidadeAtual)
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfIdCliente)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(labelSessaoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelSala)
-                            .addComponent(jLabel5)
                             .addComponent(jLabel12)
                             .addComponent(labelPreco)
                             .addComponent(labelSessao)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfIdSessao, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(labelTotalCompra))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelQuantidadeCompra)
-                            .addComponent(jLabel8))))
+                            .addComponent(jLabel8)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel2)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(labelNomeFilme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGap(18, 18, 18)
+                                            .addComponent(tfIdFilme)))
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jcbTipoDeIngresso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(labelNomeSala, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                    .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(11, 11, 11)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tfIdSala, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tfIdIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(tfIdSessao, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(61, 61, 61)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 46, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfIdCompra)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
+                                .addGap(28, 28, 28)
+                                .addComponent(labelQuantidadeAtual)
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfIdCliente)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addComponent(jSeparator2)
         );
@@ -301,18 +389,19 @@ public class TelaBilheteria extends javax.swing.JFrame {
                             .addComponent(tfIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfIdCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(19, 19, 19)
-                                .addComponent(labelQuantidadeAtual))))
+                                .addComponent(labelQuantidadeAtual))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfIdFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfIdFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelNomeFilme))
                         .addGap(21, 21, 21)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
@@ -324,13 +413,15 @@ public class TelaBilheteria extends javax.swing.JFrame {
                 .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfIdSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelNomeSala))
                 .addGap(18, 18, 18)
                 .addComponent(labelSessao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfIdSessao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfIdSessao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -353,7 +444,7 @@ public class TelaBilheteria extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -405,6 +496,14 @@ public class TelaBilheteria extends javax.swing.JFrame {
         diminuirUnidade();
         calculaTotalCompra(Double.parseDouble(labelPreco.getText()), Integer.parseInt(labelQuantidadeCompra.getText()));
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jcbTipoDeIngressoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbTipoDeIngressoItemStateChanged
+        recuperaIdTipoIngresso();
+        recuperaPrecoTipoIngresso();
+        
+        calculaTotalCompra(Double.parseDouble(labelPreco.getText()), Integer.parseInt(labelQuantidadeCompra.getText()));
+        
+    }//GEN-LAST:event_jcbTipoDeIngressoItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -458,6 +557,8 @@ public class TelaBilheteria extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JComboBox<String> jcbTipoDeIngresso;
+    private javax.swing.JLabel labelNomeFilme;
+    private javax.swing.JLabel labelNomeSala;
     private javax.swing.JLabel labelPreco;
     private javax.swing.JLabel labelQuantidadeAtual;
     private javax.swing.JLabel labelQuantidadeCompra;

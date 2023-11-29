@@ -47,16 +47,16 @@ public class CadCinema extends javax.swing.JFrame {
     }
     
     private Boolean existeDadosTemporarios(){
-        if(DadosTemporarios.temObject instanceof ModCinema){
-            int id = ((ModCinema) DadosTemporarios.temObject).getId();
-            int idCidade = ((ModCinema) DadosTemporarios.temObject).getIdCidade();
-            String nome = ((ModCinema) DadosTemporarios.temObject).getNome();
+        if(DadosTemporarios.temObjectFilme instanceof ModCinema){
+            int id = ((ModCinema) DadosTemporarios.temObjectFilme).getId();
+            int idCidade = ((ModCinema) DadosTemporarios.temObjectFilme).getIdCidade();
+            String nome = ((ModCinema) DadosTemporarios.temObjectFilme).getNome();
             
             tfId.setText(String.valueOf(id));
             tfIdCidade.setText(String.valueOf(id));
             tfNome.setText(nome);
             
-            DadosTemporarios.temObject = null;
+            DadosTemporarios.temObjectFilme = null;
             
             return true;
         }else

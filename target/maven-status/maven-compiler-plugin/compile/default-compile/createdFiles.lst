@@ -1,6 +1,7 @@
 com\mycompany\visao\outros\clientes\MenuPrincipalFrontEnd$6.class
 com\mycompany\visao\cliente\ListCliente$4.class
 com\mycompany\visao\outros\clientes\TelaBilheteria$3.class
+com\mycompany\visao\outros\clientes\TelaBilheteria$6.class
 my\company\visao\outros\funcionarios\MenuPrincipal$1.class
 my\company\visao\outros\funcionarios\MenuPrincipal$4.class
 com\mycompany\visao\outros\clientes\TelaLogin$1.class
@@ -19,6 +20,7 @@ com\mycompany\visao\cliente\ListCliente$1.class
 com\mycompany\visao\outros\clientes\MenuPrincipalFrontEnd$3.class
 com\mycompany\visao\salas\ListSala.class
 com\mycompany\dao\DaoIngresso.class
+com\mycompany\visao\filme\ListFilme$3.class
 com\mycompany\visao\ingressos\ListIngresso$1.class
 com\mycompany\dao\DaoCliente.class
 com\mycompany\visao\cinema\ListCinema$1.class
@@ -52,6 +54,7 @@ com\mycompany\visao\outros\clientes\TelaAlteracaoSenha$1.class
 my\company\visao\outros\funcionarios\MenuPrincipal$7.class
 com\mycompany\visao\salas\ListSala$2.class
 com\mycompany\visao\outros\clientes\TelaLogin.class
+com\mycompany\visao\cliente\CadCliente$5.class
 com\mycompany\visao\cinema\ListCinema$3.class
 com\mycompany\modelo\ModFilme.class
 com\mycompany\visao\filme\ListFilme.class
@@ -69,6 +72,7 @@ com\mycompany\visao\cinema\CadCinema$2.class
 com\mycompany\dao\DaoCidade.class
 com\mycompany\visao\cinema\ListCinema$2.class
 com\mycompany\visao\sessao\CadSessao$2.class
+com\mycompany\visao\compra\ListCompra$3.class
 com\mycompany\visao\cliente\CadCliente$1.class
 com\mycompany\visao\outros\clientes\MenuPrincipalFrontEnd$2.class
 com\mycompany\ferramentas\Constantes.class
@@ -79,6 +83,7 @@ com\mycompany\visao\genero\ListGenero$1.class
 com\mycompany\ferramentas\DadosTemporarios.class
 my\company\visao\outros\funcionarios\MenuPrincipal$5.class
 com\mycompany\visao\outros\clientes\TelaLogin$2.class
+com\mycompany\visao\outros\clientes\TelaLogin$5.class
 com\mycompany\visao\cinema\ListCinema$4.class
 com\mycompany\modelo\ModCompra.class
 com\mycompany\visao\cinema\CadCinema.class
@@ -98,6 +103,7 @@ com\mycompany\visao\filme\ListFilme$2.class
 my\company\visao\outros\funcionarios\MenuPrincipal$15.class
 com\mycompany\visao\outros\clientes\TelaBilheteria$4.class
 com\mycompany\visao\cinema\ListCinema$5.class
+com\mycompany\visao\genero\ListGenero$3.class
 com\mycompany\visao\sessao\ListSessao.class
 com\mycompany\visao\filme\CadFilme$1.class
 com\mycompany\visao\sessao\ListSessao$2.class

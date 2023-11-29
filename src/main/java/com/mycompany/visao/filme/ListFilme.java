@@ -4,6 +4,10 @@
  */
 package com.mycompany.visao.filme;
 
+import com.mycompany.dao.DaoFilme;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author elymar.8221
@@ -15,7 +19,282 @@ public class ListFilme extends javax.swing.JFrame {
      */
     public ListFilme() {
         initComponents();
+        
+        setLocationRelativeTo(null);
+        
+        listarTodos();
     }
+    
+    public void listarTodos(){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableFilme.getModel();
+            
+            tableFilme.setModel(defaultTableModel);
+
+            DaoFilme daoFilme = new DaoFilme();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoFilme.listarTodos();
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String idGenero = resultSet.getString(2);
+                String nome = resultSet.getString(3);
+                String sinopse = resultSet.getString(4);
+                String diretor = resultSet.getString(5);
+                String datadelancamento = resultSet.getString(6);
+                String duracao = resultSet.getString(7);
+                String classificacao = resultSet.getString(8);
+                
+                defaultTableModel.addRow(new Object[]{id, idGenero, nome, sinopse, diretor, datadelancamento, duracao, classificacao});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorId(int pId){
+        try{
+            
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableFilme.getModel();
+            
+            tableFilme.setModel(defaultTableModel);
+
+            DaoFilme daoFilme = new DaoFilme();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoFilme.listarPorId(pId);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String idGenero = resultSet.getString(2);
+                String nome = resultSet.getString(3);
+                String sinopse = resultSet.getString(4);
+                String diretor = resultSet.getString(5);
+                String datadelancamento = resultSet.getString(6);
+                String duracao = resultSet.getString(7);
+                String classificacao = resultSet.getString(8);
+                
+                defaultTableModel.addRow(new Object[]{id, idGenero, nome, sinopse, diretor, datadelancamento, duracao, classificacao});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorIdGenero(int pIdGenero){
+        try{
+            
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableFilme.getModel();
+            
+            tableFilme.setModel(defaultTableModel);
+
+            DaoFilme daoFilme = new DaoFilme();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoFilme.listarPorIdGenero(pIdGenero);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String idGenero = resultSet.getString(2);
+                String nome = resultSet.getString(3);
+                String sinopse = resultSet.getString(4);
+                String diretor = resultSet.getString(5);
+                String datadelancamento = resultSet.getString(6);
+                String duracao = resultSet.getString(7);
+                String classificacao = resultSet.getString(8);
+                
+                defaultTableModel.addRow(new Object[]{id, idGenero, nome, sinopse, diretor, datadelancamento, duracao, classificacao});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorNome(String pNome){
+        try{
+            
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableFilme.getModel();
+            
+            tableFilme.setModel(defaultTableModel);
+
+            DaoFilme daoFilme = new DaoFilme();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoFilme.listarPorNome(pNome);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String idGenero = resultSet.getString(2);
+                String nome = resultSet.getString(3);
+                String sinopse = resultSet.getString(4);
+                String diretor = resultSet.getString(5);
+                String datadelancamento = resultSet.getString(6);
+                String duracao = resultSet.getString(7);
+                String classificacao = resultSet.getString(8);
+                
+                defaultTableModel.addRow(new Object[]{id, idGenero, nome, sinopse, diretor, datadelancamento, duracao, classificacao});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorSinopse(String pSinopse){
+        try{
+            
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableFilme.getModel();
+            
+            tableFilme.setModel(defaultTableModel);
+
+            DaoFilme daoFilme = new DaoFilme();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoFilme.listarPorSinopse(pSinopse);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String idGenero = resultSet.getString(2);
+                String nome = resultSet.getString(3);
+                String sinopse = resultSet.getString(4);
+                String diretor = resultSet.getString(5);
+                String datadelancamento = resultSet.getString(6);
+                String duracao = resultSet.getString(7);
+                String classificacao = resultSet.getString(8);
+                
+                defaultTableModel.addRow(new Object[]{id, idGenero, nome, sinopse, diretor, datadelancamento, duracao, classificacao});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorDiretor(String pDiretor){
+        try{
+            
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableFilme.getModel();
+            
+            tableFilme.setModel(defaultTableModel);
+
+            DaoFilme daoFilme = new DaoFilme();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoFilme.listarPorDiretor(pDiretor);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String idGenero = resultSet.getString(2);
+                String nome = resultSet.getString(3);
+                String sinopse = resultSet.getString(4);
+                String diretor = resultSet.getString(5);
+                String datadelancamento = resultSet.getString(6);
+                String duracao = resultSet.getString(7);
+                String classificacao = resultSet.getString(8);
+                
+                defaultTableModel.addRow(new Object[]{id, idGenero, nome, sinopse, diretor, datadelancamento, duracao, classificacao});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorDataDeLancamento(String pData){
+        try{
+            
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableFilme.getModel();
+            
+            tableFilme.setModel(defaultTableModel);
+
+            DaoFilme daoFilme = new DaoFilme();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoFilme.listarPorDataDeLancamento(pData);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String idGenero = resultSet.getString(2);
+                String nome = resultSet.getString(3);
+                String sinopse = resultSet.getString(4);
+                String diretor = resultSet.getString(5);
+                String datadelancamento = resultSet.getString(6);
+                String duracao = resultSet.getString(7);
+                String classificacao = resultSet.getString(8);
+                
+                defaultTableModel.addRow(new Object[]{id, idGenero, nome, sinopse, diretor, datadelancamento, duracao, classificacao});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorDuracao(String pDuracao){
+        try{
+            
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableFilme.getModel();
+            
+            tableFilme.setModel(defaultTableModel);
+
+            DaoFilme daoFilme = new DaoFilme();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoFilme.listarPorDuracao(pDuracao);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String idGenero = resultSet.getString(2);
+                String nome = resultSet.getString(3);
+                String sinopse = resultSet.getString(4);
+                String diretor = resultSet.getString(5);
+                String datadelancamento = resultSet.getString(6);
+                String duracao = resultSet.getString(7);
+                String classificacao = resultSet.getString(8);
+                
+                defaultTableModel.addRow(new Object[]{id, idGenero, nome, sinopse, diretor, datadelancamento, duracao, classificacao});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorClassificacao(String pClassificacao){
+        try{
+            
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableFilme.getModel();
+            
+            tableFilme.setModel(defaultTableModel);
+
+            DaoFilme daoFilme = new DaoFilme();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoFilme.listarPorClassificacao(pClassificacao);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String idGenero = resultSet.getString(2);
+                String nome = resultSet.getString(3);
+                String sinopse = resultSet.getString(4);
+                String diretor = resultSet.getString(5);
+                String datadelancamento = resultSet.getString(6);
+                String duracao = resultSet.getString(7);
+                String classificacao = resultSet.getString(8);
+                
+                defaultTableModel.addRow(new Object[]{id, idGenero, nome, sinopse, diretor, datadelancamento, duracao, classificacao});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,6 +321,11 @@ public class ListFilme extends javax.swing.JFrame {
 
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         tableFilme.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,6 +402,32 @@ public class ListFilme extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        switch (jcbTipoFiltro.getSelectedIndex()){
+            case 0:
+                listarTodos();
+                break;
+            case 1:
+                listarPorNome(tfFiltro.getText());
+                break;
+            case 2:
+                listarPorSinopse(tfFiltro.getText());
+                break;
+            case 3:
+                listarPorDiretor(tfFiltro.getText());
+                break;
+            case 4:
+                listarPorDataDeLancamento(tfFiltro.getText());
+                break;
+            case 5:
+                listarPorDuracao(tfFiltro.getText());
+                break;
+            case 6:
+                listarPorClassificacao(tfFiltro.getText());
+                break;
+        }                    
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments

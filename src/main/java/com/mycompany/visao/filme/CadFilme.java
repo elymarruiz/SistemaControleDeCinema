@@ -14,9 +14,10 @@ public class CadFilme extends javax.swing.JFrame {
      * Creates new form CadFilme
      */
     public CadFilme() {
+        
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,7 +31,7 @@ public class CadFilme extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         tfId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcbIdGenero = new javax.swing.JComboBox<>();
         tfIdGenero = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -45,7 +46,7 @@ public class CadFilme extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         taSipnopse = new javax.swing.JTextArea();
         tfDuracao = new javax.swing.JTextField();
-        btnAcao1 = new javax.swing.JButton();
+        btnAcao = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -85,8 +86,8 @@ public class CadFilme extends javax.swing.JFrame {
         taSipnopse.setRows(5);
         jScrollPane1.setViewportView(taSipnopse);
 
-        btnAcao1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        btnAcao1.setText("Salvar");
+        btnAcao.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        btnAcao.setText("Salvar");
 
         btnExcluir.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         btnExcluir.setText("Excluir");
@@ -108,16 +109,17 @@ public class CadFilme extends javax.swing.JFrame {
                             .addComponent(jScrollPane1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jcbIdGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(tfIdGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel8)
-                                    .addComponent(jLabel9))
+                                    .addComponent(jLabel9)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(tfId, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(tfData)
                             .addComponent(tfDuracao))
@@ -129,7 +131,7 @@ public class CadFilme extends javax.swing.JFrame {
                             .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAcao1)
+                        .addComponent(btnAcao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnExcluir))))
         );
@@ -144,7 +146,7 @@ public class CadFilme extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbIdGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfIdGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
@@ -172,7 +174,7 @@ public class CadFilme extends javax.swing.JFrame {
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAcao1)
+                    .addComponent(btnAcao)
                     .addComponent(btnExcluir))
                 .addContainerGap())
         );
@@ -227,9 +229,8 @@ public class CadFilme extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAcao1;
+    private javax.swing.JButton btnAcao;
     private javax.swing.JButton btnExcluir;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -241,6 +242,7 @@ public class CadFilme extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> jcbIdGenero;
     private javax.swing.JTextArea taSipnopse;
     private javax.swing.JTextField tfData;
     private javax.swing.JTextField tfDiretor;

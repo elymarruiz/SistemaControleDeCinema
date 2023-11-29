@@ -267,7 +267,7 @@ public class ListCinema extends javax.swing.JFrame {
 
                 modCinema.setIdCidade(idCidade);
                 
-                DadosTemporarios.temObject = (ModCinema) modCinema;
+                DadosTemporarios.temObjectFilme = (ModCinema) modCinema;
 
                 CadCinema cadCinema = new CadCinema();
                 cadCinema.setVisible(true);

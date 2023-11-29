@@ -46,7 +46,7 @@ public class ListCompra extends javax.swing.JFrame {
                 String sessao = resultSet.getString(5);
                 String horario = resultSet.getString(6);
                 String ingresso = resultSet.getString(7);
-                String preco = resultSet.getString(8);
+                Double preco = resultSet.getDouble(8);
                 
                 defaultTableModel.addRow(new Object[]{id, cliente, filme, sala, sessao, horario, ingresso, preco});
             }
@@ -55,7 +55,307 @@ public class ListCompra extends javax.swing.JFrame {
         }
     }     
     
+    public void listarPorId(int pId){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCompra.getModel();
+            
+            tableCompra.setModel(defaultTableModel);
+
+            DaoCompra daoCompra = new DaoCompra();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoCompra.listarPorId(pId);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String cliente = resultSet.getString(2);
+                String filme = resultSet.getString(3);
+                String sala = resultSet.getString(4);
+                String sessao = resultSet.getString(5);
+                String horario = resultSet.getString(6);
+                String ingresso = resultSet.getString(7);
+                Double preco = resultSet.getDouble(8);
+                
+                defaultTableModel.addRow(new Object[]{id, cliente, filme, sala, sessao, horario, ingresso, preco});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
     
+    public void listarPorCliente(String pCliente){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCompra.getModel();
+            
+            tableCompra.setModel(defaultTableModel);
+
+            DaoCompra daoCompra = new DaoCompra();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoCompra.listarPorCliente(pCliente);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String cliente = resultSet.getString(2);
+                String filme = resultSet.getString(3);
+                String sala = resultSet.getString(4);
+                String sessao = resultSet.getString(5);
+                String horario = resultSet.getString(6);
+                String ingresso = resultSet.getString(7);
+                Double preco = resultSet.getDouble(8);
+                
+                defaultTableModel.addRow(new Object[]{id, cliente, filme, sala, sessao, horario, ingresso, preco});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorFilme(String pFilme){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCompra.getModel();
+            
+            tableCompra.setModel(defaultTableModel);
+
+            DaoCompra daoCompra = new DaoCompra();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoCompra.listarPorFilme(pFilme);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String cliente = resultSet.getString(2);
+                String filme = resultSet.getString(3);
+                String sala = resultSet.getString(4);
+                String sessao = resultSet.getString(5);
+                String horario = resultSet.getString(6);
+                String ingresso = resultSet.getString(7);
+                Double preco = resultSet.getDouble(8);
+                
+                defaultTableModel.addRow(new Object[]{id, cliente, filme, sala, sessao, horario, ingresso, preco});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorSala(String pSala){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCompra.getModel();
+            
+            tableCompra.setModel(defaultTableModel);
+
+            DaoCompra daoCompra = new DaoCompra();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoCompra.listarPorSala(pSala);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String cliente = resultSet.getString(2);
+                String filme = resultSet.getString(3);
+                String sala = resultSet.getString(4);
+                String sessao = resultSet.getString(5);
+                String horario = resultSet.getString(6);
+                String ingresso = resultSet.getString(7);
+                Double preco = resultSet.getDouble(8);
+                
+                defaultTableModel.addRow(new Object[]{id, cliente, filme, sala, sessao, horario, ingresso, preco});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    
+    public void listarPorSessao(String pSessao){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCompra.getModel();
+            
+            tableCompra.setModel(defaultTableModel);
+
+            DaoCompra daoCompra = new DaoCompra();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoCompra.listarPorSessao(pSessao);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String cliente = resultSet.getString(2);
+                String filme = resultSet.getString(3);
+                String sala = resultSet.getString(4);
+                String sessao = resultSet.getString(5);
+                String horario = resultSet.getString(6);
+                String ingresso = resultSet.getString(7);
+                Double preco = resultSet.getDouble(8);
+                
+                defaultTableModel.addRow(new Object[]{id, cliente, filme, sala, sessao, horario, ingresso, preco});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    
+    public void listarPorHorario(String pHorario){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCompra.getModel();
+            
+            tableCompra.setModel(defaultTableModel);
+
+            DaoCompra daoCompra = new DaoCompra();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoCompra.listarPorHorario(pHorario);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String cliente = resultSet.getString(2);
+                String filme = resultSet.getString(3);
+                String sala = resultSet.getString(4);
+                String sessao = resultSet.getString(5);
+                String horario = resultSet.getString(6);
+                String ingresso = resultSet.getString(7);
+                Double preco = resultSet.getDouble(8);
+                
+                defaultTableModel.addRow(new Object[]{id, cliente, filme, sala, sessao, horario, ingresso, preco});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorTipoDeIngresso(String pIngresso){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCompra.getModel();
+            
+            tableCompra.setModel(defaultTableModel);
+
+            DaoCompra daoCompra = new DaoCompra();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoCompra.listarPorTipoDeIngresso(pIngresso);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String cliente = resultSet.getString(2);
+                String filme = resultSet.getString(3);
+                String sala = resultSet.getString(4);
+                String sessao = resultSet.getString(5);
+                String horario = resultSet.getString(6);
+                String ingresso = resultSet.getString(7);
+                Double preco = resultSet.getDouble(8);
+                
+                defaultTableModel.addRow(new Object[]{id, cliente, filme, sala, sessao, horario, ingresso, preco});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorPrecoMaiorQue(Double pPrecoMaior){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCompra.getModel();
+            
+            tableCompra.setModel(defaultTableModel);
+
+            DaoCompra daoCompra = new DaoCompra();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoCompra.listarPorPrecoMaiorQue(pPrecoMaior);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String cliente = resultSet.getString(2);
+                String filme = resultSet.getString(3);
+                String sala = resultSet.getString(4);
+                String sessao = resultSet.getString(5);
+                String horario = resultSet.getString(6);
+                String ingresso = resultSet.getString(7);
+                Double preco = resultSet.getDouble(8);
+                
+                defaultTableModel.addRow(new Object[]{id, cliente, filme, sala, sessao, horario, ingresso, preco});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorPrecoMenorQue(Double pPrecoMenor){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCompra.getModel();
+            
+            tableCompra.setModel(defaultTableModel);
+
+            DaoCompra daoCompra = new DaoCompra();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoCompra.listarPorPrecoMaiorQue(pPrecoMenor);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String cliente = resultSet.getString(2);
+                String filme = resultSet.getString(3);
+                String sala = resultSet.getString(4);
+                String sessao = resultSet.getString(5);
+                String horario = resultSet.getString(6);
+                String ingresso = resultSet.getString(7);
+                Double preco = resultSet.getDouble(8);
+                
+                defaultTableModel.addRow(new Object[]{id, cliente, filme, sala, sessao, horario, ingresso, preco});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorPrecoIgualA(Double pPrecoIgual){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCompra.getModel();
+            
+            tableCompra.setModel(defaultTableModel);
+
+            DaoCompra daoCompra = new DaoCompra();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoCompra.listarPorPrecoIgualA(pPrecoIgual);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String cliente = resultSet.getString(2);
+                String filme = resultSet.getString(3);
+                String sala = resultSet.getString(4);
+                String sessao = resultSet.getString(5);
+                String horario = resultSet.getString(6);
+                String ingresso = resultSet.getString(7);
+                Double preco = resultSet.getDouble(8);
+                
+                defaultTableModel.addRow(new Object[]{id, cliente, filme, sala, sessao, horario, ingresso, preco});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,6 +382,11 @@ public class ListCompra extends javax.swing.JFrame {
 
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         tableCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -158,6 +463,41 @@ public class ListCompra extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+       switch (jcbTipoFiltro.getSelectedIndex()){
+            case 0:
+                listarTodos();
+                break;
+            case 1:
+                listarPorCliente(tfFiltro.getText());
+                break;
+            case 2:
+                listarPorFilme(tfFiltro.getText());
+                break;
+            case 3:
+                listarPorSala(tfFiltro.getText());
+                break;
+            case 4:
+                listarPorSessao(tfFiltro.getText());
+                break;
+            case 5:
+                listarPorHorario(tfFiltro.getText());
+                break;
+            case 6:
+                listarPorTipoDeIngresso(tfFiltro.getText());
+                break;
+            case 7:
+                listarPorPrecoMaiorQue(Double.parseDouble(tfFiltro.getText()));
+                break;
+            case 8:
+                listarPorPrecoMenorQue(Double.parseDouble(tfFiltro.getText()));
+                break;
+            case 9:
+                listarPorPrecoIgualA(Double.parseDouble(tfFiltro.getText()));
+                break;
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments

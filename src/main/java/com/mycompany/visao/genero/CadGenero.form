@@ -49,7 +49,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="tfNome" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="btnAcao1" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnAcao" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="415" max="32767" attributes="0"/>
                           <Component id="btnExcluir" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -79,7 +79,7 @@
                   <Component id="tfNome" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="290" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnAcao1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnAcao" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -108,7 +108,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="tfNome">
         </Component>
-        <Component class="javax.swing.JButton" name="btnAcao1">
+        <Component class="javax.swing.JButton" name="btnAcao">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="3"/>

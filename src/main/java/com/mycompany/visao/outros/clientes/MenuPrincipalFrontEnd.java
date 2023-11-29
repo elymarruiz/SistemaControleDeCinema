@@ -10,6 +10,9 @@ import com.mycompany.ferramentas.Constantes;
 import com.mycompany.ferramentas.DadosTemporarios;
 import com.mycompany.ferramentas.Formularios;
 import com.mycompany.modelo.ModCompra;
+import com.mycompany.modelo.ModFilme;
+import com.mycompany.modelo.ModSala;
+import com.mycompany.modelo.ModSessao;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -287,48 +290,66 @@ public class MenuPrincipalFrontEnd extends javax.swing.JFrame {
     private void tableCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCompraMouseClicked
         try{
             if (evt.getClickCount() == 2){
-                ModCompra modCompra = new ModCompra();
-                DaoCompra daoCompra = new DaoCompra();
                 
-//                JOptionPane.showMessageDialog(null, Integer.parseInt(String.valueOf(tableCompra.getValueAt(tableCompra.getSelectedRow(), 0))));
+                ModFilme modFilme = new ModFilme();
+                ModSala modSala = new ModSala();
+                ModSessao modSessao = new ModSessao();
                 
-                ResultSet resultSet = daoCompra.listarSessoesPorId(Integer.parseInt(String.valueOf(tableCompra.getValueAt(tableCompra.getSelectedRow(), 0))));
+                String filme = String.valueOf(tableCompra.getValueAt(tableCompra.getSelectedRow(), 2));
+                String sala = String.valueOf(tableCompra.getValueAt(tableCompra.getSelectedRow(), 1));
+                String data = String.valueOf(tableCompra.getValueAt(tableCompra.getSelectedRow(), 3));
+                String horario = String.valueOf(tableCompra.getValueAt(tableCompra.getSelectedRow(), 4));
                 
-                resultSet.next();
+                modFilme.setNome(filme);
+                modSala.setNome(sala);
+                modSessao.setData(data);
+                modSessao.setHorario(horario);
                 
-                int id  = resultSet.getInt("ID");
-//                String cliente = resultSet.getString("CLIENTE");
-                String filme = resultSet.getString("FILME");
-                String sala = resultSet.getString("SALA");
-//                String sessao = resultSet.getString("SESSÃO");
-                String data = resultSet.getString("DATA");
-                String horario = resultSet.getString("HORARIO");
-//                String ingresso = resultSet.getString("INGRESSO");
-                
-//                System.out.println(cliente);
-//                System.out.println(filme);
-//                System.out.println(sala);
-//                System.out.println(sessao);
-//                System.out.println(horario);
-//                System.out.println(ingresso);
-                
-//                modCompra.setId(id);             
-//                modCompra.setIdCliente(id);
-//                modCompra.setIdFilme(id);
-//                modCompra.setIdSala(id);
-//                modCompra.setIdSessao(id);
-//                modCompra.setIdIngresso(id);
-//                modCompra.setHorario(horario);
-//                modCompra.setPreco(Double.parseDouble(String.valueOf(tableCompra.getValueAt(tableCompra.getSelectedRow(), 1))));
-                
-//                DadosTemporarios.temObject = (ModCompra) modCompra;
-//                DadosTemporarios.clienteCompraBilheteria = cliente;
-                DadosTemporarios.filmeCompraBilheteria = filme;
-                DadosTemporarios.salaCompraBilheteria = sala;
-//                DadosTemporarios.sessaoCompraBilheteria = sessao;;
-                DadosTemporarios.horarioCompraBilheteria = horario;
-//                DadosTemporarios.ingressoCompraBilheteria = ingresso;
-                
+                DadosTemporarios.temObjectFilme = modFilme;
+                DadosTemporarios.tempObjectSala = modSala;
+                DadosTemporarios.tempObjectSessao = modSessao;
+//                ModCompra modCompra = new ModCompra();
+//                DaoCompra daoCompra = new DaoCompra();
+//                
+////                JOptionPane.showMessageDialog(null, Integer.parseInt(String.valueOf(tableCompra.getValueAt(tableCompra.getSelectedRow(), 0))));
+//                
+//                ResultSet resultSet = daoCompra.listarSessoesPorId(Integer.parseInt(String.valueOf(tableCompra.getValueAt(tableCompra.getSelectedRow(), 0))));
+//                
+//                resultSet.next();
+//                
+//                int id  = resultSet.getInt("ID");
+////                String cliente = resultSet.getString("CLIENTE");
+//                String filme = resultSet.getString("FILME");
+//                String sala = resultSet.getString("SALA");
+////                String sessao = resultSet.getString("SESSÃO");
+//                String data = resultSet.getString("DATA");
+//                String horario = resultSet.getString("HORARIO");
+////                String ingresso = resultSet.getString("INGRESSO");
+//                
+////                System.out.println(cliente);
+////                System.out.println(filme);
+////                System.out.println(sala);
+////                System.out.println(sessao);
+////                System.out.println(horario);
+////                System.out.println(ingresso);
+//                
+////                modCompra.setId(id);             
+////                modCompra.setIdCliente(id);
+////                modCompra.setIdFilme(id);
+////                modCompra.setIdSala(id);
+////                modCompra.setIdSessao(id);
+////                modCompra.setIdIngresso(id);
+////                modCompra.setHorario(horario);
+////                modCompra.setPreco(Double.parseDouble(String.valueOf(tableCompra.getValueAt(tableCompra.getSelectedRow(), 1))));
+//                
+////                DadosTemporarios.temObject = (ModCompra) modCompra;
+////                DadosTemporarios.clienteCompraBilheteria = cliente;
+//                DadosTemporarios.filmeCompraBilheteria = filme;
+//                DadosTemporarios.salaCompraBilheteria = sala;
+////                DadosTemporarios.sessaoCompraBilheteria = sessao;;
+//                DadosTemporarios.horarioCompraBilheteria = horario;
+////                DadosTemporarios.ingressoCompraBilheteria = ingresso;
+//                
                 if (Formularios.telaBilheteria == null){
                     Formularios.telaBilheteria = new TelaBilheteria();
                     Formularios.telaBilheteria.setVisible(true);

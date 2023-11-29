@@ -22,17 +22,19 @@ public class CadCliente extends javax.swing.JFrame {
      * Creates new form CadCliente
      */
     public CadCliente() {
-        initComponents();       
+        initComponents();  
+        
+        existeDadosTemporarios();
     }
     
     private Boolean existeDadosTemporarios(){        
-        if(DadosTemporarios.temObject instanceof ModCliente){
-            int id = ((ModCliente) DadosTemporarios.temObject).getId();
-            String nome = ((ModCliente) DadosTemporarios.temObject).getNome();
-            String sobrenome = ((ModCliente) DadosTemporarios.temObject).getSobrenome();
-            String genero = ((ModCliente) DadosTemporarios.temObject).getGenero();
-            String email = ((ModCliente) DadosTemporarios.temObject).getEmail();
-            String cpf = ((ModCliente) DadosTemporarios.temObject).getCpf();
+        if(DadosTemporarios.temObjectFilme instanceof ModCliente){
+            int id = ((ModCliente) DadosTemporarios.temObjectFilme).getId();
+            String nome = ((ModCliente) DadosTemporarios.temObjectFilme).getNome();
+            String sobrenome = ((ModCliente) DadosTemporarios.temObjectFilme).getSobrenome();
+            String genero = ((ModCliente) DadosTemporarios.temObjectFilme).getGenero();
+            String email = ((ModCliente) DadosTemporarios.temObjectFilme).getEmail();
+            String cpf = ((ModCliente) DadosTemporarios.temObjectFilme).getCpf();
             
             tfId.setText(String.valueOf(id));
             tfNome.setText(nome);
@@ -61,23 +63,22 @@ public class CadCliente extends javax.swing.JFrame {
     }
     
     private void alterar(){
-        DaoCliente daoCliente = new DaoCliente();
-        
-        if (daoCliente.alterar(Integer.parseInt(tfId.getText()), tfNome.getText(), tfSobrenome.getText(), jcbGenero.getSelectedItem(), tfEmail.getText(), tfCpf.getText(), tfUsuario.getText()))
-        if (daoCliente.alterar(Integer.parseInt( tfId.getText()), tfNome.getText(), tfSobrenome.getText(), (String) jcbGenero.getSelectedItem(), tfEmail.getText(), tfCpf.getText(), tfUsuario.getText(), String.valueOf(pfSenha.getPassword()))){
-            JOptionPane.showMessageDialog(null, "Cliente alterado com sucesso!");
-                      
-            tfNome.setText("");
-            tfSobrenome.setText("");
-            tfEmail.setText("");
-            tfCpf.setText("");
-        }else{
-            JOptionPane.showMessageDialog(null, "Não foi possível alterar o cliente!");
-        }
-        
-        ((ListCliente) Formularios.listCliente).listarTodos();
-        
-        dispose();
+//        DaoCliente daoCliente = new DaoCliente();
+//        
+//        if (daoCliente.alterar(Integer.parseInt( tfId.getText()), tfNome.getText(), tfSobrenome.getText(), (String) jcbGenero.getSelectedItem(), tfEmail.getText(), tfCpf.getText(), tfUsuario.getText(), String.valueOf(pfSenha.getPassword()))){
+//            JOptionPane.showMessageDialog(null, "Cliente alterado com sucesso!");
+//                      
+//            tfNome.setText("");
+//            tfSobrenome.setText("");
+//            tfEmail.setText("");
+//            tfCpf.setText("");
+//        }else{
+//            JOptionPane.showMessageDialog(null, "Não foi possível alterar o cliente!");
+//        }
+//        
+//        ((ListCliente) Formularios.listCliente).listarTodos();
+//        
+//        dispose();
     }
     
     private void excluir(){
