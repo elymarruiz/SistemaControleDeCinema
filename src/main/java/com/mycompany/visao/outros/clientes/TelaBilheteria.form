@@ -90,7 +90,7 @@
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="jcbTipoDeIngresso" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="labelNomeSala" alignment="0" pref="170" max="32767" attributes="0"/>
+                                      <Component id="labelNomeSala" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jComboBox3" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -111,11 +111,7 @@
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jComboBox1" min="-2" pref="174" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="0" pref="46" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="tfIdCompra" max="32767" attributes="0"/>
                                       <Component id="jButton1" pref="111" max="32767" attributes="0"/>
@@ -123,13 +119,16 @@
                                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                   <Component id="labelQuantidadeAtual" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jButton2" min="-2" pref="110" max="-2" attributes="0"/>
                                       <Component id="tfIdCliente" max="32767" attributes="0"/>
-                                      <Component id="jButton2" pref="110" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="jComboBox2" min="-2" pref="167" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jComboBox1" min="-2" pref="174" max="-2" attributes="0"/>
+                                      <Component id="jComboBox2" min="-2" pref="167" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -279,7 +278,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="QuantidadeCompra"/>
+            <Property name="text" type="java.lang.String" value="1"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
@@ -354,7 +353,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="pre&#xe7;oIngresso"/>
+            <Property name="text" type="java.lang.String" value="20"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelSessaoHorario">
@@ -403,7 +402,10 @@
         <Component class="javax.swing.JComboBox" name="jComboBox3">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
+              <StringArray count="2">
+                <StringItem index="0" value="19:00"/>
+                <StringItem index="1" value="21:00"/>
+              </StringArray>
             </Property>
           </Properties>
           <AuxValues>

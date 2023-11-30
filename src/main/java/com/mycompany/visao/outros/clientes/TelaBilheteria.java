@@ -37,9 +37,12 @@ public class TelaBilheteria extends javax.swing.JFrame {
         
         existeDadosTemporarios();
         
-        labelQuantidadeCompra.setText("1");
+//        labelQuantidadeCompra.setText("1");
         
-        calculaTotalCompra(Double.parseDouble(labelPreco.getText()), Integer.parseInt(labelQuantidadeCompra.getText()));
+//        labelPreco.setText("20.0");
+//        labelQuantidadeCompra.setText("1");
+        
+//        calculaTotalCompra(Double.parseDouble(labelPreco.getText()), Integer.parseInt(labelQuantidadeCompra.getText()));
         
         
 //        calculaTotalCompra(Double.parseDouble(labelPreco.getText()), Integer.parseInt(labelQuantidadeCompra.getText()));
@@ -50,6 +53,9 @@ public class TelaBilheteria extends javax.swing.JFrame {
         tfIdSala.setVisible(false);
         tfIdSessao.setVisible(false);
         tfIdIngresso.setVisible(false);
+        
+        jComboBox1.setVisible(false);
+        jComboBox2.setVisible(false);
     }
     
     private Boolean existeDadosTemporarios(){        
@@ -240,7 +246,7 @@ public class TelaBilheteria extends javax.swing.JFrame {
         labelTotalCompra.setText("TotalCompra");
 
         labelQuantidadeCompra.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelQuantidadeCompra.setText("QuantidadeCompra");
+        labelQuantidadeCompra.setText("1");
 
         btnComprar.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         btnComprar.setText("Comprar");
@@ -269,7 +275,7 @@ public class TelaBilheteria extends javax.swing.JFrame {
         jLabel12.setText("Preço");
 
         labelPreco.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelPreco.setText("preçoIngresso");
+        labelPreco.setText("20");
 
         labelSessaoHorario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelSessaoHorario.setText("sessaoHorário");
@@ -294,6 +300,8 @@ public class TelaBilheteria extends javax.swing.JFrame {
 
         labelSessao.setFont(new java.awt.Font("Sitka Display", 1, 24)); // NOI18N
         labelSessao.setText("Sessão");
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "19:00", "21:00" }));
 
         tfIdSala.setText("idSala");
 
@@ -346,7 +354,7 @@ public class TelaBilheteria extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jcbTipoDeIngresso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(labelNomeSala, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                    .addComponent(labelNomeSala, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -360,21 +368,20 @@ public class TelaBilheteria extends javax.swing.JFrame {
                                 .addGap(61, 61, 61)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 46, Short.MAX_VALUE)
+                                .addGap(46, 46, 46)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tfIdCompra)
                                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
                                 .addGap(28, 28, 28)
                                 .addComponent(labelQuantidadeAtual)
                                 .addGap(30, 30, 30)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfIdCliente)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfIdCliente)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addComponent(jSeparator2)

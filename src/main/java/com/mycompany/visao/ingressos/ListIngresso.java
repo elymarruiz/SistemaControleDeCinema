@@ -330,6 +330,13 @@ public class ListIngresso extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tableIngresso);
+        if (tableIngresso.getColumnModel().getColumnCount() > 0) {
+            tableIngresso.getColumnModel().getColumn(0).setResizable(false);
+            tableIngresso.getColumnModel().getColumn(1).setResizable(false);
+            tableIngresso.getColumnModel().getColumn(2).setResizable(false);
+            tableIngresso.getColumnModel().getColumn(3).setResizable(false);
+            tableIngresso.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
