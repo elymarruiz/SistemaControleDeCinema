@@ -40,6 +40,8 @@ public class MenuPrincipalFrontEnd extends javax.swing.JFrame {
         }
         
         labelUsuarioLogado.setText("");
+        
+        Formularios.menuPrincipalFrontEnd = this;
     }
     
     public void listarTodos(){
@@ -375,6 +377,10 @@ public class MenuPrincipalFrontEnd extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tableCompraMouseClicked
 
+    public void atualizaUsuarioLogado(){
+        labelUsuarioLogado.setText(DadosTemporarios.usuarioLogado);
+    }
+    
     private void tfPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPesquisaActionPerformed
         if(DadosTemporarios.usuarioLogado != null){
             if(tfPesquisa.getText().equals(""))

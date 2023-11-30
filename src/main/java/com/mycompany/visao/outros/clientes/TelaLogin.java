@@ -159,6 +159,8 @@ public class TelaLogin extends javax.swing.JDialog {
                 DadosTemporarios.idUsuarioLogado = idCliente;
                 DadosTemporarios.usuarioLogado = tfUsuario.getText();
                 
+                ((MenuPrincipalFrontEnd) Formularios.menuPrincipalFrontEnd).atualizaUsuarioLogado();
+                
                 dispose();
             }else{
                 JOptionPane.showMessageDialog(null, Constantes.USUARIO_SENHA_INVALIDOS);
